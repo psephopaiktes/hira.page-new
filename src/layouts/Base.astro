@@ -1,23 +1,53 @@
 ---
-const { title } = Astro.props;
+const { title, description } = Astro.props;
+import { ViewTransitions } from "astro:transitions";
+const today = new Date();
 ---
 
 <html lang="ja">
   <head>
+    <ViewTransitions />
+
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="generator" content={Astro.generator} />
     <title>{title}</title>
+
+    <!-- Font preloads -->
+    <link
+      rel="preload"
+      href="/fonts/atkinson-regular.woff"
+      as="font"
+      type="font/woff"
+      crossorigin
+    />
+    <link
+      rel="preload"
+      href="/fonts/atkinson-bold.woff"
+      as="font"
+      type="font/woff"
+      crossorigin
+    />
   </head>
+
   <body>
     <nav>
-      <a href="#">ホーム</a>
-      <a href="#">ブログ</a>
-      <a href="#">お問い合わせ</a>
+      <ul>
+        <li><a href="/">Home</a></li>
+        <li><a href="/me">Me</a></li>
+        <li><a href="/blog">blog</a></li>
+        <li><a href="/contact">Contact</a></li>
+      </ul>
     </nav>
+
     <h1>{title}</h1>
+
     <main>
       <slot />
-      <!-- ここにコンテンツが挿入されます -->
     </main>
+
+    <footer>
+      © {today.getFullYear()} Akira HIRATA.
+    </footer>
   </body>
 </html>
