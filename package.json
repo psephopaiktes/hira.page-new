@@ -2,9 +2,7 @@
   "scripts": {
     "dev": "astro dev",
     "start": "astro dev",
-    "build": "astro build",
-    "preview": "astro preview",
-    "astro": "astro"
+    "build": "astro build"
   },
   "dependencies": {
     "@astrojs/rss": "^3.0.0",

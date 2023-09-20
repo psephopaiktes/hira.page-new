@@ -1,19 +1,56 @@
 ---
 import { getCollection } from "astro:content";
-import AmpBlog from "@/layouts/AmpBlog.astro";
+import Base from "@/layouts/Base.astro";
 
 export async function getStaticPaths() {
-  const blogEntries = await getCollection("blog");
-  return blogEntries.map((entry) => ({
-    params: { slug: entry.slug },
-    props: { entry },
+  const posts = await getCollection("blog");
+  return posts.map((post) => ({
+    params: { slug: post.slug },
+    props: { post },
   }));
 }
 
-const { entry } = Astro.props;
-const { Content } = await entry.render();
+const { post } = Astro.props;
+const { Content } = await post.render();
 ---
 
-<AmpBlog frontmatter={entry.data}>
-  <Content />
-</AmpBlog>
+<Base title={post.data.title}>
+  {
+    post.data.heroImage && (
+      <>
+        <img
+          width={1020}
+          height={510}
+          src={post.data.heroImage}
+          alt="{post.data.title}"
+          transition:name={post.slug}
+        />
+      </>
+    )
+  }
+
+  <p>{post.data.pubDate.toDateString()}</p>
+  <p>
+    {
+      post.data.updatedDate && (
+        <div class="last-updated-on">
+          Last updated on <span>{post.data.updatedDate.toDateString()}</span>
+        </div>
+      )
+    }
+  </p>
+
+  <ul>
+    {
+      post.data.tags.map((tag) => (
+        <li>
+          <a href={`/blog/tag/${tag}/`}>{tag}</a>
+        </li>
+      ))
+    }
+  </ul>
+
+  <main>
+    <Content />
+  </main>
+</Base>

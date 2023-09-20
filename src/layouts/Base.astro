@@ -1,7 +1,9 @@
 ---
-const { title, description } = Astro.props;
+import "../styles/global.css";
 import { ViewTransitions } from "astro:transitions";
-const today = new Date();
+import Nav from "@/components/Nav.astro";
+
+const { title, description } = Astro.props;
 ---
 
 <html lang="ja">
@@ -16,38 +18,37 @@ const today = new Date();
     <!-- Font preloads -->
     <link
       rel="preload"
-      href="/fonts/atkinson-regular.woff"
+      href="/font/Regular.woff2"
       as="font"
-      type="font/woff"
+      type="font/woff2"
       crossorigin
     />
     <link
       rel="preload"
-      href="/fonts/atkinson-bold.woff"
+      href="/font/Bold.woff2"
       as="font"
-      type="font/woff"
+      type="font/woff2"
+      crossorigin
+    />
+    <link
+      rel="preload"
+      href="/font/FuturaNowVar.woff2"
+      as="font"
+      type="font/woff2"
       crossorigin
     />
   </head>
 
   <body>
-    <nav>
-      <ul>
-        <li><a href="/">Home</a></li>
-        <li><a href="/me">Me</a></li>
-        <li><a href="/blog">blog</a></li>
-        <li><a href="/contact">Contact</a></li>
-      </ul>
-    </nav>
-
-    <h1>{title}</h1>
+    <Nav />
 
     <main>
+      <h1>{title}</h1>
       <slot />
     </main>
 
     <footer>
-      © {today.getFullYear()} Akira HIRATA.
+      © {new Date().getFullYear()} Akira HIRATA.
     </footer>
   </body>
 </html>

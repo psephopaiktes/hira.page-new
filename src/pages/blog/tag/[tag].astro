@@ -5,8 +5,25 @@ import { getCollection } from "astro:content";
 const blog = await getCollection("blog");
 const tags = [...new Set(blog.map((post) => post.data.tags).flat())];
 
-blog.sort((a, b) => b.data.pubDate.valueOf() - a.data.pubDate.valueOf());
-// TODO: SortはHTML側に書くと並び替えできる?
+export async function getStaticPaths() {
+  const allPosts = await getCollection("blog");
+  const uniqueTags = [
+    ...new Set(allPosts.map((blog) => blog.data.tags).flat()),
+  ];
+
+  return uniqueTags.map((tag) => {
+    const filteredPosts = allPosts.filter((blog) =>
+      blog.data.tags.includes(tag),
+    );
+    return {
+      params: { tag },
+      props: { posts: filteredPosts },
+    };
+  });
+}
+
+const { tag } = Astro.params;
+const { posts } = Astro.props;
 ---
 
 <Base title="Blog">
@@ -24,7 +41,7 @@ blog.sort((a, b) => b.data.pubDate.valueOf() - a.data.pubDate.valueOf());
   <h2>記事リスト</h2>
   <ul>
     {
-      blog.map((blog) => (
+      posts.map((blog) => (
         <li>
           <a href={`/blog/${blog.slug}/`}>
             <img

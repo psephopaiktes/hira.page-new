@@ -1,0 +1,29 @@
+---
+const currentPath = Astro.url.pathname.split("/")[1];
+const pageList = ["blog", "me", "works"];
+---
+
+<nav>
+  <h1><a href="/">WEBA</a></h1>
+
+  <ul>
+    {
+      pageList.map((path) => (
+        <li>
+          {path == currentPath ? (
+            <span transition:name="NavCursor">></span>
+          ) : (
+            ""
+          )}
+          <a class={path == currentPath ? "active" : ""} href={"/" + path}>
+            {path.toUpperCase()}
+          </a>
+        </li>
+      ))
+    }
+  </ul>
+
+  <a href="/contact">Contact</a>
+</nav>
+
+<style></style>
