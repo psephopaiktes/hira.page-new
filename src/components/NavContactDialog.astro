@@ -1,0 +1,29 @@
+---
+
+---
+
+<dialog id="js-contactDialog">
+  <button id="js-closeContactBtn">XXXX</button>
+
+  <h2>CONTACT</h2>
+
+  <form method="dialog">
+    <p>ここにフォーム部品を配置</p>
+    <input type="text" autofocus />
+    <p><button type="submit">確定</button></p>
+  </form>
+</dialog>
+
+<style>
+  dialog {
+    padding: 0;
+    border: 0;
+    border-radius: 0.6rem;
+    box-shadow: 0 0 1em black;
+  }
+
+  dialog::backdrop {
+    background-color: rgba(0, 0, 0, 0.4);
+    backdrop-filter: blur(4px);
+  }
+</style>

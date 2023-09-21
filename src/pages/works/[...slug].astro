@@ -1,0 +1,49 @@
+---
+import { getCollection } from "astro:content";
+import { Image } from "astro:assets";
+import Base from "@/layouts/Base.astro";
+
+export async function getStaticPaths() {
+  const posts = await getCollection("works");
+  return posts.map((post) => ({
+    params: { slug: post.slug },
+    props: { post },
+  }));
+}
+
+const { post } = Astro.props;
+const { Content } = await post.render();
+---
+
+<Base title={post.data.title}>
+  <Image
+    src={post.data.cover}
+    alt={post.data.title}
+    transition:name={post.slug}
+  />
+
+  <p>{post.data.pubDate.toDateString()}</p>
+  <p>
+    {
+      post.data.updatedDate && (
+        <div class="last-updated-on">
+          Last updated on <span>{post.data.updatedDate.toDateString()}</span>
+        </div>
+      )
+    }
+  </p>
+
+  <ul>
+    {
+      post.data.tags.map((tag) => (
+        <li>
+          <a href={`/works/tag/${tag}/`}>{tag}</a>
+        </li>
+      ))
+    }
+  </ul>
+
+  <main>
+    <Content />
+  </main>
+</Base>

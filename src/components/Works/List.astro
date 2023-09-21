@@ -1,0 +1,23 @@
+---
+import { Image } from "astro:assets";
+const { posts } = Astro.props;
+---
+
+<ul>
+  {
+    posts.map((post) => (
+      <li>
+        <a href={`/works/${post.slug}/`}>
+          <Image
+            src={post.data.cover}
+            alt={post.data.title}
+            transition:name={post.slug}
+          />
+          <h4 class="title">{post.data.title}</h4>
+        </a>
+      </li>
+    ))
+  }
+</ul>
+
+<style></style>

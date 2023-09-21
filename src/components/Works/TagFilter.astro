@@ -1,0 +1,33 @@
+---
+import { getCollection } from "astro:content";
+
+const posts = await getCollection("works");
+const tags = [...new Set(posts.map((post) => post.data.tags).flat())];
+
+const currentTag = Astro.params.tag;
+---
+
+<ul>
+  <li class={currentTag ? "" : "active"}>
+    <a href="/works" inert={currentTag ? null : "inert"}>ALL</a>
+  </li>
+
+  {
+    tags.map((tag) => (
+      <li class={tag == currentTag ? "active" : ""}>
+        <a
+          href={`/works/tag/${tag}/`}
+          inert={tag == currentTag ? "inert" : null}
+        >
+          {tag}
+        </a>
+      </li>
+    ))
+  }
+</ul>
+
+<style>
+  .active {
+    opacity: 0.5;
+  }
+</style>
