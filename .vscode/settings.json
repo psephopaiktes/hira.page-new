@@ -1,7 +1,10 @@
 {
   "editor.formatOnSave": true,
-  "editor.defaultFormatter": "esbenp.prettier-vscode"
+  "editor.defaultFormatter": "esbenp.prettier-vscode",
+  "files.associations": {
+    "*.mdx": "markdown"
+  },
   // "editor.codeActionsOnSave": {
   //   "source.fixAll.eslint": true
-  // }
+  // },
 }

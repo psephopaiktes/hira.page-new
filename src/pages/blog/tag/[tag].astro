@@ -1,9 +1,8 @@
 ---
-import Base from "@/layouts/Base.astro";
 import { getCollection } from "astro:content";
-
-const blog = await getCollection("blog");
-const tags = [...new Set(blog.map((post) => post.data.tags).flat())];
+import Base from "@/layouts/Base.astro";
+import BlogList from "@/components/Blog/List.astro";
+import BlogTagFilter from "@/components/Blog/TagFilter.astro";
 
 export async function getStaticPaths() {
   const allPosts = await getCollection("blog");
@@ -22,39 +21,14 @@ export async function getStaticPaths() {
   });
 }
 
-const { tag } = Astro.params;
+// const { tag } = Astro.params;
 const { posts } = Astro.props;
 ---
 
 <Base title="Blog">
   <h2>タグ一覧</h2>
-  <ul>
-    {
-      tags.map((tag) => (
-        <li>
-          <a href={`/blog/tag/${tag}/`}>{tag}</a>
-        </li>
-      ))
-    }
-  </ul>
+  <BlogTagFilter />
 
   <h2>記事リスト</h2>
-  <ul>
-    {
-      posts.map((blog) => (
-        <li>
-          <a href={`/blog/${blog.slug}/`}>
-            <img
-              width={720}
-              height={360}
-              src={blog.data.heroImage}
-              alt="{blog.data.title}"
-              transition:name={blog.slug}
-            />
-            <h4 class="title">{blog.data.title}</h4>
-          </a>
-        </li>
-      ))
-    }
-  </ul>
+  <BlogList {posts} />
 </Base>
