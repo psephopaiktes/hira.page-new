@@ -34,14 +34,12 @@ const pageList = ["blog", "me", "works"];
     "astro:page-load",
     () => {
       // この指定をしないとページ遷移後にイベントが発火しない
-
       const button = document.getElementById("js-contactBtn");
       const closeButton = document.getElementById("js-closeContactBtn");
       const dialog = document.getElementById("js-contactDialog");
 
       button?.addEventListener("click", () => {
         dialog?.showModal();
-        console.log("show");
       });
 
       closeButton?.addEventListener("click", () => {
