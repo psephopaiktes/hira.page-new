@@ -1,8 +1,6 @@
 ---
-import NavContactDialog from "@/components/NavContactDialog.astro";
-
 const currentPath = Astro.url.pathname.split("/")[1];
-const pageList = ["blog", "me", "works"];
+const pageList = ["blog", "me", "works", "price"];
 ---
 
 <nav>
@@ -25,35 +23,7 @@ const pageList = ["blog", "me", "works"];
     }
   </ul>
 
-  <button id="js-contactBtn" transition:persist>Contact</button>
-  <NavContactDialog />
+  <a href="/contact">Contact</a>
 </nav>
-
-<script>
-  document.addEventListener(
-    "astro:page-load",
-    () => {
-      // この指定をしないとページ遷移後にイベントが発火しない
-      const button = document.getElementById("js-contactBtn");
-      const closeButton = document.getElementById("js-closeContactBtn");
-      const dialog = document.getElementById("js-contactDialog");
-
-      button?.addEventListener("click", () => {
-        dialog?.showModal();
-      });
-
-      closeButton?.addEventListener("click", () => {
-        dialog?.close();
-      });
-
-      dialog?.addEventListener("click", (event) => {
-        if (event.target == dialog) {
-          dialog.close();
-        }
-      });
-    },
-    { once: false },
-  );
-</script>
 
 <style></style>

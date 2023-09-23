@@ -1,16 +1,13 @@
 ---
+import Base from "@/layouts/Base.astro";
 const FormId = import.meta.env.PUBLIC_FORMCARRY_ENDPOINT;
 ---
 
-<dialog id="js-contactDialog">
-  <button id="js-closeContactBtn">XXXX</button>
-
-  <h2>CONTACT</h2>
-
+<Base title="CONTACT">
   <form
-    method="dialog"
     action={`https://formcarry.com/s/${FormId}`}
     method="POST"
+    accept-charset="UTF-8"
     novalidate
   >
     <label>
@@ -29,6 +26,7 @@ const FormId = import.meta.env.PUBLIC_FORMCARRY_ENDPOINT;
       <p>お問い合わせ内容</p>
       <textarea
         id="js-message"
+        name="message"
         placeholder="お問い合わせ内容"
         rows="6"
         required
@@ -39,36 +37,30 @@ const FormId = import.meta.env.PUBLIC_FORMCARRY_ENDPOINT;
     <button id="js-submit" type="submit" disabled>送信</button>
     <p id="js-errorText" style="color: red;"></p>
   </form>
-</dialog>
+</Base>
 
 <script>
-  document.addEventListener(
-    "astro:page-load",
-    () => {
-      const emailInput = document.getElementById("js-email");
-      const messageInput = document.getElementById("js-message");
-      const errorText = document.getElementById("js-errorText");
-      const submitButton = document.getElementById("js-submit");
+  const emailInput = document.getElementById("js-email");
+  const messageInput = document.getElementById("js-message");
+  const errorText = document.getElementById("js-errorText");
+  const submitButton = document.getElementById("js-submit");
 
-      emailInput?.addEventListener("input", validateForm);
-      messageInput?.addEventListener("input", validateForm);
+  emailInput?.addEventListener("input", validateForm);
+  messageInput?.addEventListener("input", validateForm);
 
-      function validateForm() {
-        if (!emailInput?.checkValidity()) {
-          errorText.textContent = "正しい形式のEmailを入力してください。";
-          submitButton.setAttribute("disabled", "");
-        } else if (!messageInput?.checkValidity()) {
-          errorText.textContent =
-            "10文字以上、800文字以下のお問い合わせ内容を入力してください。";
-          submitButton.setAttribute("disabled", "");
-        } else {
-          errorText.textContent = "";
-          submitButton.removeAttribute("disabled");
-        }
-      }
-    },
-    { once: false },
-  );
+  function validateForm() {
+    if (!emailInput?.checkValidity()) {
+      errorText.textContent = "正しい形式のEmailを入力してください。";
+      submitButton.setAttribute("disabled", "");
+    } else if (!messageInput?.checkValidity()) {
+      errorText.textContent =
+        "10文字以上、800文字以下のお問い合わせ内容を入力してください。";
+      submitButton.setAttribute("disabled", "");
+    } else {
+      errorText.textContent = "";
+      submitButton.removeAttribute("disabled");
+    }
+  }
 </script>
 
 <style>
