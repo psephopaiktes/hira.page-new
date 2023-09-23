@@ -23,7 +23,6 @@ const FormId = import.meta.env.PUBLIC_FORMCARRY_ENDPOINT;
         required
         autofocus
       />
-      <p id="emailValidationMessage" style="color: red;"></p>
     </label>
 
     <label>
@@ -34,11 +33,11 @@ const FormId = import.meta.env.PUBLIC_FORMCARRY_ENDPOINT;
         rows="6"
         required
         minlength="10"
-        maxlength="400"></textarea>
-      <p id="messageValidationMessage" style="color: red;"></p>
+        maxlength="800"></textarea>
     </label>
 
     <button id="js-submit" type="submit" disabled>送信</button>
+    <p id="js-errorText" style="color: red;"></p>
   </form>
 </dialog>
 
@@ -47,58 +46,26 @@ const FormId = import.meta.env.PUBLIC_FORMCARRY_ENDPOINT;
     "astro:page-load",
     () => {
       const emailInput = document.getElementById("js-email");
-      const emailValidationMessage = document.getElementById(
-        "emailValidationMessage",
-      );
       const messageInput = document.getElementById("js-message");
-      const messageValidationMessage = document.getElementById(
-        "messageValidationMessage",
-      );
+      const errorText = document.getElementById("js-errorText");
       const submitButton = document.getElementById("js-submit");
 
-      if (
-        !emailInput ||
-        !emailValidationMessage ||
-        !messageInput ||
-        !messageValidationMessage ||
-        !submitButton
-      ) {
-        return;
-      }
+      emailInput?.addEventListener("input", validateForm);
+      messageInput?.addEventListener("input", validateForm);
 
-      emailInput.addEventListener("blur", validateEmail);
-      messageInput.addEventListener("blur", validateMessage);
-
-      // HTML要素を2つわったす関数に共通化したい
-      function validateEmail() {
-        if (!emailInput.checkValidity()) {
-          emailValidationMessage.textContent =
-            "正しい形式のEmailを入力してください。";
-        } else {
-          emailValidationMessage.textContent = "";
-        }
-        checkFormValidity();
-      }
-
-      function validateMessage() {
-        if (!messageInput.checkValidity()) {
-          messageValidationMessage.textContent =
-            "10文字以上、400文字以下のお問い合わせ内容を入力してください。";
-        } else {
-          messageValidationMessage.textContent = "";
-        }
-        checkFormValidity();
-      }
-
-      function checkFormValidity() {
-        if (emailInput.checkValidity() && messageInput.checkValidity()) {
-          submitButton.removeAttribute("disabled");
-        } else {
+      function validateForm() {
+        if (!emailInput?.checkValidity()) {
+          errorText.textContent = "正しい形式のEmailを入力してください。";
           submitButton.setAttribute("disabled", "");
+        } else if (!messageInput?.checkValidity()) {
+          errorText.textContent =
+            "10文字以上、800文字以下のお問い合わせ内容を入力してください。";
+          submitButton.setAttribute("disabled", "");
+        } else {
+          errorText.textContent = "";
+          submitButton.removeAttribute("disabled");
         }
       }
-
-      // 送信ボタンを押す前の処理が必須。Valid後→間違った情報を入力してそのまま送信できちゃう
     },
     { once: false },
   );
