@@ -4,12 +4,7 @@ const FormId = import.meta.env.PUBLIC_FORMCARRY_ENDPOINT;
 ---
 
 <Base title="CONTACT">
-  <form
-    action={`https://formcarry.com/s/${FormId}`}
-    method="POST"
-    accept-charset="UTF-8"
-    novalidate
-  >
+  <form id="js-contactForm" novalidate>
     <label>
       <p>返信用メールアドレス</p>
       <input
@@ -39,7 +34,8 @@ const FormId = import.meta.env.PUBLIC_FORMCARRY_ENDPOINT;
   </form>
 </Base>
 
-<script>
+<script define:vars={{ FormId }}>
+  const contactForm = document.getElementById("js-contactForm");
   const emailInput = document.getElementById("js-email");
   const messageInput = document.getElementById("js-message");
   const errorText = document.getElementById("js-errorText");
@@ -61,6 +57,38 @@ const FormId = import.meta.env.PUBLIC_FORMCARRY_ENDPOINT;
       submitButton.removeAttribute("disabled");
     }
   }
+
+  contactForm?.addEventListener("submit", (e) => {
+    e.preventDefault();
+
+    fetch(`https://formcarry.com/s/${FormId}`, {
+      recapture: false,
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+        Accept: "application/json",
+      },
+      body: JSON.stringify({
+        email: emailInput.value,
+        message: messageInput.value,
+      }),
+    })
+      .then((res) => {
+        if (res.ok) {
+          alert("送信しました。");
+          // TODO: Snackバーかボタン替えるか。できれば今と同じUXにしたい。
+          contactForm.reset();
+        } else {
+          // Formcarry error
+          alert("送信に失敗しました。");
+        }
+      })
+      .catch((err) => {
+        // network error
+        alert("送信に失敗しました。");
+        console.error(err);
+      });
+  });
 </script>
 
 <style>
