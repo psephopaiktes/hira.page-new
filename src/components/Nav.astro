@@ -3,8 +3,12 @@ const currentPath = Astro.url.pathname.split("/")[1];
 const pageList = ["blog", "me", "works", "price"];
 ---
 
-<nav>
+<nav class="l-nav">
   <h1><a href="/">WEBA</a></h1>
+
+  <a href="#">
+    <span class="material-symbols-rounded"> cancel</span>
+  </a>
 
   <ul>
     {

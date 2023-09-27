@@ -1,8 +1,8 @@
 ---
-import { getCollection } from "astro:content";
-import Base from "@/layouts/Base.astro";
 import BlogList from "@/components/Blog/List.astro";
 import BlogTagFilter from "@/components/Blog/TagFilter.astro";
+import Base from "@/layouts/Base.astro";
+import { getCollection } from "astro:content";
 
 const posts = await getCollection("blog");
 const tags = [...new Set(posts.map((post) => post.data.tags).flat())];

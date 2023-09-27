@@ -37,18 +37,22 @@ const { title = "WEBA", description = "ブログ" } = Astro.props;
       type="font/woff2"
       crossorigin
     />
+
+    <link
+      href="https://fonts.googleapis.com/css2?family=Material+Symbols+Rounded:wght,FILL@500..700,1"
+      rel="stylesheet"
+    />
   </head>
 
   <body>
     <Nav />
 
-    <main>
+    <main class="l-main">
       <h1>{title}</h1>
       <slot />
+      <footer>
+        © {new Date().getFullYear()} Akira HIRATA.
+      </footer>
     </main>
-
-    <footer>
-      © {new Date().getFullYear()} Akira HIRATA.
-    </footer>
   </body>
 </html>

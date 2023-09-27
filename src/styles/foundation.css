@@ -53,9 +53,6 @@
 }
 
 body {
-  max-width: 60em;
-  margin: 64px auto;
-  padding: 0;
   color: rgba(var(--color-main, 0.9));
   line-height: 1.6;
   font-weight: 500;
@@ -65,13 +62,13 @@ body {
     "Avenir Next",
     "Avenir",
     "Century Gothic",
+    Tazugane,
+    "Tazugane Gothic StdN",
     "Robot",
     "SF Pro Text",
     "Helvetica Neue",
     "Helvetica",
     "Arial",
-    Tazugane,
-    "Tazugane Gothic StdN",
     "Hiragino Sans",
     "Hiragino Kaku Gothic ProN",
     "Noto Sans JP",
@@ -87,6 +84,14 @@ body {
   hanging-punctuation: allow-end;
   letter-spacing: 0.02em;
   -webkit-text-size-adjust: 100%;
+}
+
+a .material-symbols-rounded {
+  font-variation-settings: "wght" 500;
+  transition: 0.2s ease-out;
+  &:hover {
+    font-variation-settings: "wght" 700;
+  }
 }
 
 :focus-visible {
