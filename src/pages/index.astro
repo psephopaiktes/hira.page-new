@@ -2,6 +2,25 @@
 import Base from "@/layouts/Base.astro";
 ---
 
+<script>
+  import "@dotlottie/player-component";
+</script>
+
 <Base title="ホームページ">
   <p>レイアウトに包まれたページのコンテンツ</p>
+
+  <dotlottie-player
+    src="/lottie/interactivity_example.lottie"
+    activeStateId="Play on hold"
+  >
+  </dotlottie-player>
+
+  <dotlottie-player src="/lottie/video.lottie" activeStateId="hold"
+  ></dotlottie-player>
 </Base>
+
+<style>
+  dotlottie-player {
+    width: 240px;
+  }
+</style>

@@ -6,10 +6,6 @@ const pageList = ["blog", "me", "works", "price"];
 <nav class="l-nav">
   <h1><a href="/">WEBA</a></h1>
 
-  <a href="#">
-    <span class="material-symbols-rounded"> cancel</span>
-  </a>
-
   <ul>
     {
       pageList.map((path) => (
@@ -19,7 +15,13 @@ const pageList = ["blog", "me", "works", "price"];
           ) : (
             ""
           )}
-          <a class={path == currentPath ? "active" : ""} href={"/" + path}>
+
+          <a
+            class={path == currentPath ? "active" : ""}
+            href={"/" + path}
+            data-lottie-container
+          >
+            <dotlottie-player loop="false" src={`/lottie/${path}.lottie`} />
             {path.toUpperCase()}
           </a>
         </li>
@@ -27,7 +29,44 @@ const pageList = ["blog", "me", "works", "price"];
     }
   </ul>
 
-  <a href="/contact">Contact</a>
+  <a href="/contact" data-lottie-container>
+    <dotlottie-player src="/lottie/contact.lottie"></dotlottie-player>
+     Contact
+  </a>
 </nav>
 
-<style></style>
+<script>
+  import "@dotlottie/player-component";
+
+  document.addEventListener(
+    "astro:page-load",
+    () => {
+      const menuItems = document.querySelectorAll("[data-lottie-container]");
+
+      menuItems?.forEach((menuItem) => {
+        const LottieItem = menuItem.querySelector("dotlottie-player");
+        if (!LottieItem) return;
+
+        menuItem.addEventListener("mouseenter", () => {
+          LottieItem.setDirection(1);
+          LottieItem.play();
+        });
+
+        menuItem.addEventListener("mouseleave", () => {
+          LottieItem.setDirection(-1);
+          LottieItem.play();
+        });
+      });
+    },
+    { once: false },
+  );
+</script>
+
+<style>
+  a {
+    display: inline-flex;
+  }
+  dotlottie-player {
+    width: 24px;
+  }
+</style>

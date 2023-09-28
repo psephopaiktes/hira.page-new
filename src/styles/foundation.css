@@ -86,13 +86,13 @@ body {
   -webkit-text-size-adjust: 100%;
 }
 
-a .material-symbols-rounded {
+/* a .material-symbols-rounded {
   font-variation-settings: "wght" 500;
   transition: 0.2s ease-out;
   &:hover {
     font-variation-settings: "wght" 700;
   }
-}
+} */
 
 :focus-visible {
   outline-color: rgb(var(--color-theme));
