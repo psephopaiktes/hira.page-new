@@ -10,7 +10,8 @@
     "@astrojs/rss": "^3.0.0",
     "@astrojs/sitemap": "^3.0.0",
     "@dotlottie/player-component": "^2.7.0",
-    "astro": "^3.0.12"
+    "astro": "^3.0.12",
+    "less": "^4.2.0"
   },
   "devDependencies": {
     "prettier": "^3.0.3",

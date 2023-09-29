@@ -62,9 +62,28 @@ const pageList = ["blog", "me", "works", "price"];
   );
 </script>
 
-<style>
+<style lang="less">
+  @import "@/styles/common.less";
+
+  nav {
+    display: flex;
+    justify-content: center;
+    align-items: end;
+    flex-direction: column;
+  }
+
+  ul {
+    @media (width < @lg) {
+      display: flex;
+    }
+  }
+
   a {
+    color: rgb(var(--color-base));
     display: inline-flex;
+    // @media (width < @xl) {
+    //   display: none;
+    // }
   }
   dotlottie-player {
     width: 24px;

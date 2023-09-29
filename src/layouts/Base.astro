@@ -1,7 +1,7 @@
 ---
-import "../styles/global.css";
-import { ViewTransitions } from "astro:transitions";
 import Nav from "@/components/Nav.astro";
+import "@/styles/global.less";
+import { ViewTransitions } from "astro:transitions";
 
 const { title = "WEBA", description = "ブログ" } = Astro.props;
 ---
@@ -44,7 +44,7 @@ const { title = "WEBA", description = "ブログ" } = Astro.props;
     /> -->
   </head>
 
-  <body>
+  <body class="l-body">
     <Nav />
 
     <main class="l-main">
@@ -54,5 +54,13 @@ const { title = "WEBA", description = "ブログ" } = Astro.props;
         © {new Date().getFullYear()} Akira HIRATA.
       </footer>
     </main>
+    <style>
+      /* TODO: Fix */
+      main {
+        margin: 8px;
+        border-radius: 8px;
+        background: rgb(var(--color-base));
+      }
+    </style>
   </body>
 </html>

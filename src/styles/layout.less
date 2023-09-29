@@ -1,0 +1,42 @@
+.l-body {
+  display: flex;
+  justify-content: center;
+  @media (width < @lg) {
+    align-items: center;
+    flex-direction: column;
+  }
+}
+
+.l-nav {
+  width: 320px;
+  height: 100vh;
+  position: sticky;
+  top: 0;
+  z-index: 0;
+  @media (width < @2xl) {
+    width: 240px;
+  }
+  @media (width < @xl) {
+    width: 200px;
+  }
+  @media (width < @lg) {
+    width: min(100%, 640px);
+    height: auto;
+  }
+  @media (width < @sm) {
+  }
+}
+
+.l-main {
+  width: 1200px;
+  z-index: 1;
+  @media (width < @2xl) {
+    width: 960px;
+  }
+  @media (width < @xl) {
+    width: 800px;
+  }
+  @media (width < @lg) {
+    width: min(100%, 640px);
+  }
+}
