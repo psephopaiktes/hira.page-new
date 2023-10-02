@@ -1,9 +1,15 @@
 .l-body {
   display: flex;
   justify-content: center;
+  gap: 2vw;
   @media (width < @lg) {
+    padding: 24px 16px;
     align-items: center;
     flex-direction: column;
+    gap: 0;
+  }
+  @media (width < @xs) {
+    padding: 16px 8px;
   }
 }
 

@@ -1,17 +1,23 @@
 ---
 const currentPath = Astro.url.pathname.split("/")[1];
 const pageList = ["blog", "me", "works", "price"];
+
+import Logo from "@/assets/logo.svg";
 ---
 
 <nav class="l-nav">
-  <h1><a href="/">WEBA</a></h1>
+  <h1 class="logo">
+    <a href="/">
+      <img src={Logo.src} width={Logo.width} height={Logo.height} alt="WEBA" />
+    </a>
+  </h1>
 
-  <ul>
+  <ul class="menu">
     {
       pageList.map((path) => (
         <li>
           {path == currentPath ? (
-            <span transition:name="NavCursor">></span>
+            <div class="navIndicator" transition:name="navIndicator" />
           ) : (
             ""
           )}
@@ -29,9 +35,10 @@ const pageList = ["blog", "me", "works", "price"];
     }
   </ul>
 
-  <a href="/contact" data-lottie-container>
-    <dotlottie-player src="/lottie/contact.lottie"></dotlottie-player>
-     Contact
+  <a class="contact" href="/contact" data-lottie-container>
+    <dotlottie-player loop="false" src="/lottie/contact.lottie"
+    ></dotlottie-player>
+     CONTACT
   </a>
 </nav>
 
@@ -68,24 +75,125 @@ const pageList = ["blog", "me", "works", "price"];
   nav {
     display: flex;
     justify-content: center;
-    align-items: end;
+    align-items: center;
     flex-direction: column;
-  }
-
-  ul {
+    gap: 48px;
+    @media (width < @xl) {
+      gap: 32px;
+    }
     @media (width < @lg) {
-      display: flex;
+      position: relative;
+      padding: 0 8px;
+      gap: 8px;
+      align-items: start;
     }
   }
 
-  a {
-    color: rgb(var(--color-base));
-    display: inline-flex;
-    // @media (width < @xl) {
-    //   display: none;
-    // }
-  }
   dotlottie-player {
-    width: 24px;
+    width: 36px;
+    height: 36px;
+    @media (width < @xs) {
+      width: 32px;
+      height: 32px;
+    }
+  }
+
+  .logo {
+    margin-top: -16vh;
+    width: 160px;
+    @media (width < @lg) {
+      margin-top: 0;
+      width: 128px;
+    }
+  }
+
+  .menu {
+    @media (width < @lg) {
+      display: flex;
+      width: 100%;
+      justify-content: space-between;
+      align-items: center;
+    }
+
+    li {
+      // text-align: right;
+      position: relative;
+      margin-top: 8px;
+      .navIndicator {
+        position: absolute;
+        right: 105%;
+        bottom: 16px;
+        width: 12px;
+        height: 16px;
+        clip-path: polygon(0 0, 100% 50%, 0 100%);
+        background-color: #fff;
+        opacity: 0.7;
+        transition: 0.2s ease-out;
+        @media (width < @lg) {
+          width: 48px;
+          height: 4px;
+          bottom: -8px;
+          right: calc(50% - 24px);
+          clip-path: none;
+          border-radius: 4px 4px 0 0;
+        }
+        @media (width < @xs) {
+          width: 32px;
+          right: calc(50% - 16px);
+        }
+      }
+    }
+
+    a {
+      display: inline-flex;
+      height: 40px;
+      opacity: 0.7;
+      align-items: center;
+      gap: 6px;
+      font-size: 20px;
+      font-weight: 500;
+      font-variation-settings: "wght" 500;
+      color: #fff;
+      transition: 0.2s ease-out;
+      @media (width < @lg) {
+        font-size: 18px;
+      }
+      @media (width < @sm) {
+        font-size: 16px;
+        gap: 2px;
+      }
+      @media (width < @xs) {
+        flex-direction: column;
+        height: auto;
+        gap: 0;
+        font-size: 12px;
+      }
+      &.active,
+      &:hover,
+      &:active {
+        opacity: 1;
+        font-variation-settings: "wght" 700;
+      }
+    }
+  }
+
+  .contact {
+    display: flex;
+    align-items: center;
+    padding: 8px;
+    padding-right: 16px;
+    // justify-content: center;
+    gap: 8px;
+    // width: 200px;
+    height: 48px;
+    color: #fff;
+    background: rgba(#fff, 0.2);
+    border-radius: 6px;
+    @media (width < @lg) {
+      height: 40px;
+      position: absolute;
+      top: 0;
+      right: 0;
+    }
   }
 </style>
