@@ -1,8 +1,7 @@
 ---
-const currentPath = Astro.url.pathname.split("/")[1];
-const pageList = ["blog", "works", "me", "price", "contact"];
-
 import Logo from "@/assets/logo.svg";
+
+const pageList = ["blog", "works", "me", "price"];
 ---
 
 <nav class="l-nav">
@@ -14,58 +13,48 @@ import Logo from "@/assets/logo.svg";
 
   <ul class="menu">
     {
-      pageList.map((path) => (
-        <li>
-          {path == currentPath ? (
-            <div class="navIndicator" transition:name="navIndicator" />
-          ) : (
-            ""
-          )}
+      pageList.map((path) => {
+        const isActive = `/${path}` == Astro.url.pathname;
 
-          <a
-            class={path == currentPath ? "active" : ""}
-            href={"/" + path}
-            data-lottie-container
-          >
-            <dotlottie-player
-            // TODO: ここのifは完全一致に。Blog詳細でもいちいちアニメーション再生されるので。
-              autoplay={path == currentPath ? "autoplay" : null}
-              loop="false"
-              src={`/lottie/${path}.lottie`}
-            />
-            {path.toUpperCase()}
-          </a>
-        </li>
-      ))
+        return (
+          <li>
+            {isActive && (
+              <div class="navIndicator" transition:name="navIndicator" />
+            )}
+
+            <a
+              class={isActive ? "active" : ""}
+              href={`/${path}`}
+              data-lottie-container
+            >
+              <dotlottie-player
+                autoplay={isActive ? "autoplay" : null}
+                loop="false"
+                src={`/lottie/${path}.lottie`}
+              />
+              {path.toUpperCase()}
+            </a>
+          </li>
+        );
+      })
     }
   </ul>
+
+  <a
+    class:list={["contact", { active: "/contact" == Astro.url.pathname }]}
+    href="/contact"
+    data-lottie-container
+  >
+    <dotlottie-player
+      autoplay={`/contact` == Astro.url.pathname ? "autoplay" : null}
+      loop="false"
+      src="/lottie/contact.lottie"></dotlottie-player>
+     CONTACT
+  </a>
 </nav>
 
 <script>
   import "@dotlottie/player-component";
-
-  document.addEventListener(
-    "astro:page-load",
-    () => {
-      const menuItems = document.querySelectorAll("[data-lottie-container]");
-
-      // menuItems?.forEach((menuItem) => {
-      //   const LottieItem = menuItem.querySelector("dotlottie-player");
-      //   if (!LottieItem) return;
-
-      //   menuItem.addEventListener("mouseenter", () => {
-      //     LottieItem.setDirection(1);
-      //     LottieItem.play();
-      //   });
-
-      //   menuItem.addEventListener("mouseleave", () => {
-      //     LottieItem.setDirection(-1);
-      //     LottieItem.play();
-      //   });
-      // });
-    },
-    { once: false },
-  );
 </script>
 
 <style lang="less">
@@ -81,10 +70,12 @@ import Logo from "@/assets/logo.svg";
       gap: 32px;
     }
     @media (width < @lg) {
-      position: relative;
-      padding: 0 8px;
-      gap: 16px;
-      // align-items: start;
+      align-items: start;
+      padding: 32px 8px 0;
+      gap: 8px;
+    }
+    @media (width < @xs) {
+      padding-top: 24px;
     }
   }
 
@@ -97,9 +88,11 @@ import Logo from "@/assets/logo.svg";
     }
   }
 
+  @width: 168px;
+
   .logo {
+    width: @width;
     margin-top: -16vh;
-    width: 160px;
     @media (width < @lg) {
       margin-top: 0;
       width: 128px;
@@ -107,21 +100,25 @@ import Logo from "@/assets/logo.svg";
   }
 
   .menu {
+    width: @width;
     @media (width < @lg) {
       display: flex;
       width: 100%;
       justify-content: space-between;
       align-items: center;
     }
+    @media (width < @xs) {
+      padding: 0 16px;
+    }
 
     li {
-      // text-align: right;
       position: relative;
-      margin-top: 8px;
+      margin-top: 16px;
+
       .navIndicator {
         position: absolute;
         right: 105%;
-        bottom: 16px;
+        bottom: 12px;
         width: 12px;
         height: 16px;
         clip-path: polygon(0 0, 100% 50%, 0 100%);
@@ -144,7 +141,7 @@ import Logo from "@/assets/logo.svg";
     }
 
     a {
-      display: inline-flex;
+      display: flex;
       height: 40px;
       opacity: 0.7;
       align-items: center;
@@ -176,23 +173,38 @@ import Logo from "@/assets/logo.svg";
     }
   }
 
-  // .contact {
-  //   display: flex;
-  //   align-items: center;
-  //   padding: 8px;
-  //   padding-right: 16px;
-  //   // justify-content: center;
-  //   gap: 8px;
-  //   // width: 200px;
-  //   height: 48px;
-  //   color: #fff;
-  //   background: rgba(#fff, 0.2);
-  //   border-radius: 6px;
-  //   @media (width < @lg) {
-  //     height: 40px;
-  //     position: absolute;
-  //     top: 0;
-  //     right: 0;
-  //   }
-  // }
+  .contact {
+    width: @width;
+    display: flex;
+    gap: 6px;
+    height: 48px;
+    justify-content: center;
+    align-items: center;
+    border-radius: 8px;
+    font-size: 18px;
+    font-weight: 500;
+    font-variation-settings: "wght" 500;
+    background: rgba(#fff, 0.2);
+    color: rgba(#fff, 0.8);
+    transition: 0.2s ease-out;
+    &.active,
+    &:hover,
+    &:active {
+      color: rgba(#fff, 1);
+      font-variation-settings: "wght" 700;
+    }
+    @media (width < @lg) {
+      width: auto;
+      height: 40px;
+      padding: 0 12px 0 8px;
+      position: absolute;
+      top: 28px;
+      right: 0;
+    }
+    @media (width < @xs) {
+      top: 20px;
+      gap: 2px;
+      font-size: 14px;
+    }
+  }
 </style>

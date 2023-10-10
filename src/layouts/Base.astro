@@ -1,4 +1,5 @@
 ---
+import GoTop from "@/components/GoTop.astro";
 import Nav from "@/components/Nav.astro";
 import "@/styles/global.less";
 import { ViewTransitions } from "astro:transitions";
@@ -54,6 +55,8 @@ const { title = "WEBA", description = "ブログ" } = Astro.props;
         © {new Date().getFullYear()} Akira HIRATA.
       </footer>
     </main>
+
+    <GoTop />
     <style>
       /* TODO: Fix */
       main {

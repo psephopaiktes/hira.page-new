@@ -47,8 +47,7 @@
 }
 
 :root {
-  scroll-behavior: smooth;
-  background: rgb(var(--color-theme));
+  background: rgb(@theme);
   color: rgb(var(--color-main));
 
   --color-theme: 255, 204, 102;
@@ -90,31 +89,20 @@ body {
     -apple-system,
     BlinkMacSystemFont,
     sans-serif;
-  font-smoothing: antialiased;
   font-feature-settings: "pkna" 1;
   font-kerning: normal;
-  hanging-punctuation: allow-end;
   letter-spacing: 0.02em;
-  -webkit-text-size-adjust: 100%;
 }
-
-/* a .material-symbols-rounded {
-  font-variation-settings: "wght" 500;
-  transition: 0.2s ease-out;
-  &:hover {
-    font-variation-settings: "wght" 700;
-  }
-} */
 
 :focus-visible {
-  outline-color: rgb(var(--color-theme));
+  outline-color: rgb(@theme);
 }
 ::selection {
-  background: rgb(var(--color-theme));
+  background: rgb(@theme);
   color: rgb(var(--color-base));
 }
 ::marker {
-  color: rgb(var(--color-theme));
+  color: rgb(@theme);
 }
 :is(
     ::-webkit-calendar-picker-indicator,
@@ -122,83 +110,9 @@ body {
     ::-webkit-inner-spin-button,
     ::-webkit-outer-spin-button
   ) {
-  color: rgb(var(--color-theme));
-}
-
-*,
-*::before,
-*::after {
-  margin: 0;
-  padding: 0;
-  box-sizing: border-box;
-}
-
-ul {
-  list-style-type: none;
-}
-
-img {
-  border: none;
-  vertical-align: top;
-  max-width: 100%;
-  height: auto;
-}
-
-a {
-  text-decoration-skip-ink: none;
-  text-decoration: none;
-  color: rgb(var(--color-theme));
-  word-break: break-all;
-}
-p a {
-  text-decoration: underline;
+  color: rgb(@theme);
 }
 
 p {
   margin-top: 1em;
-}
-
-b,
-strong {
-  font-weight: bolder;
-}
-
-a,
-area,
-button,
-[role="button"],
-input:not([type="range"]),
-label,
-select,
-summary,
-textarea {
-  touch-action: manipulation;
-  font-family: inherit;
-  font-size: inherit;
-  font-weight: inherit;
-  letter-spacing: inherit;
-}
-
-button {
-  cursor: pointer;
-  background: none;
-  border: none;
-  font-size: inherit;
-  color: inherit;
-  outline: none;
-}
-
-table {
-  table-layout: fixed;
-  border-collapse: collapse;
-  width: 100%;
-}
-
-@media (prefers-reduced-motion: reduce) {
-  * {
-    animation-duration: 0.01ms !important;
-    animation-iteration-count: 1 !important;
-    transition-duration: 0.01ms !important;
-    scroll-behavior: auto !important;
-  }
 }
