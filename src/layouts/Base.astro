@@ -1,10 +1,10 @@
 ---
-import GoTop from "@/components/GoTop.astro";
+import Footer from "@/components/Footer.astro";
 import Nav from "@/components/Nav.astro";
 import "@/styles/global.less";
 import { ViewTransitions } from "astro:transitions";
 
-const { title = "WEBA", description = "ブログ" } = Astro.props;
+const { title, description = "ブログ" } = Astro.props;
 ---
 
 <html lang="ja">
@@ -51,19 +51,21 @@ const { title = "WEBA", description = "ブログ" } = Astro.props;
     <main class="l-main">
       <h1>{title}</h1>
       <slot />
-      <footer>
-        © {new Date().getFullYear()} Akira HIRATA.
-      </footer>
+      <Footer />
     </main>
 
-    <GoTop />
-    <style>
+    <style lang="less">
+      @import "@/styles/common.less";
+
       /* TODO: Fix */
       main {
         margin: 8px;
         padding: 32px;
-        border-radius: 8px;
-        background: rgb(var(--color-base));
+        border-radius: 24px;
+        background: rgb(@base);
+        @media (width < @sm) {
+          padding: 16px;
+        }
       }
     </style>
   </body>

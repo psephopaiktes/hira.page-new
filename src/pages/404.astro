@@ -1,7 +1,22 @@
 ---
+import NotFound from "@/assets/404.svg";
 import Base from "@/layouts/Base.astro";
 ---
 
-<Base title="404">
-  <p>PAGE NOT FOUND</p>
+<Base>
+  <h1>404 NOT FOUND</h1>
+  <img
+    src={NotFound.src}
+    width={NotFound.width}
+    height={NotFound.height}
+    alt="404"
+  />
+  <h2>お探しのページは存在しません</h2>
+
+  <nav>
+    <ul>
+      <li><a href="/">HOME</a></li>
+      <li><a href="/contact">CONTACT</a></li>
+    </ul>
+  </nav>
 </Base>
