@@ -1,9 +1,25 @@
 ---
+import SnsLink from "@/components/SnsLink.astro";
 
+const snsList = ["X", "note", "GitHub", "Instagram", "Pinterest"];
 ---
 
 <footer>
-  © {new Date().getFullYear()} Akira HIRATA.
+  <ul class="sns">
+    {
+      snsList.map((sns) => {
+        return (
+          <li>
+            <SnsLink {sns} />
+          </li>
+        );
+      })
+    }
+  </ul>
+
+  <small>
+    © {new Date().getFullYear()} Akira HIRATA.
+  </small>
 
   <a href="#" id="js-gotop" class="l-gotop">Scroll to Top</a>
 </footer>
@@ -32,11 +48,27 @@
   footer {
     display: grid;
     place-items: center;
+    gap: 32px;
     margin-top: 48px;
-    padding: 32px;
+    padding: 64px 48px;
     background: rgba(@label, 0.05);
     color: rgb(@label);
     border-radius: 16px;
+    small {
+      font-size: 0.9em;
+      opacity: 0.8;
+    }
+  }
+
+  .sns {
+    display: flex;
+    gap: 32px;
+    @media (width < @lg) {
+      gap: 24px;
+    }
+    @media (width < @2xs) {
+      gap: 16px;
+    }
   }
 
   #js-gotop {
@@ -56,7 +88,6 @@
     background: rgba(@main, 0.2);
     backdrop-filter: saturate(1.6) blur(16px);
     box-shadow: 2px 2px 16px rgba(@main, 0.2);
-    transition: 0.2s ease-out;
 
     &::before {
       content: "";
