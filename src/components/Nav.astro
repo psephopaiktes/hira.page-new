@@ -14,7 +14,9 @@ const pageList = ["blog", "works", "me", "price"];
   <ul class="menu">
     {
       pageList.map((path) => {
-        const isActive = `/${path}` == Astro.url.pathname;
+        // Build後はpathnameの末尾にスラシュがつくのでそれを考慮
+        const isActive =
+          `/${path}` == Astro.url.pathname || `/${path}/` == Astro.url.pathname;
 
         return (
           <li>
