@@ -1,11 +1,11 @@
 ---
-import Icon from "@/components/Icon.astro";
+import SVG from "@/components/SVG.astro";
 
 const { sns, link = `https://${sns}.com/psephopaiktes` } = Astro.props;
 ---
 
-<a href={link} target="_blank" title={sns} aria-label={sns}>
-  <Icon path={`sns/${sns}`} />
+<a href={link} target="_blank" title={sns}>
+  <SVG symbol={sns} alt={sns} />
 </a>
 
 <style lang="less">
@@ -17,7 +17,18 @@ const { sns, link = `https://${sns}.com/psephopaiktes` } = Astro.props;
     width: 32px;
     height: 32px;
     word-break: keep-all;
-    opacity: 0.8;
+    opacity: 0.7;
+
+    span {
+      position: absolute;
+      left: 200%;
+    }
+
+    :global(svg) {
+      fill: currentColor;
+      width: 100%;
+      height: 100%;
+    }
 
     &::before,
     &::after {
@@ -51,7 +62,7 @@ const { sns, link = `https://${sns}.com/psephopaiktes` } = Astro.props;
     &:hover,
     &:active {
       opacity: 1;
-      // transform: scale(1.07);
+      transform: scale(1.07);
       &::before {
         opacity: 1;
         bottom: 40%;
@@ -61,17 +72,5 @@ const { sns, link = `https://${sns}.com/psephopaiktes` } = Astro.props;
         bottom: 120%;
       }
     }
-  }
-
-  span {
-    position: absolute;
-    left: 200%;
-  }
-
-  :global(svg),
-  :global(path) {
-    width: 100%;
-    height: 100%;
-    fill: currentColor !important;
   }
 </style>

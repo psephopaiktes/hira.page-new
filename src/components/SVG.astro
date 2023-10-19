@@ -1,0 +1,16 @@
+---
+const { symbol, alt } = Astro.props;
+---
+
+{
+  alt ? (
+    <svg aria-labelledby={`title-${alt}`} role="img">
+      <title id={`title-${alt}`}>{alt}</title>
+      <use xlink:href={`/img/sprite.svg#${symbol.toLowerCase()}`} />
+    </svg>
+  ) : (
+    <svg role="presentation">
+      <use xlink:href={`/img/sprite.svg#${symbol.toLowerCase()}`} />
+    </svg>
+  )
+}

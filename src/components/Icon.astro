@@ -1,6 +1,0 @@
----
-const { path } = Astro.props;
-const { default: innerHTML } = await import(`/src/assets/icon/${path}.svg?raw`);
----
-
-<Fragment set:html={innerHTML} />

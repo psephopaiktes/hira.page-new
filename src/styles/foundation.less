@@ -50,15 +50,15 @@
   background: rgba(@theme);
   color: rgb(@main);
 
-  --color-theme: 255, 170, 0;
+  --color-theme: 255, 187, 0;
   --color-label: 136, 68, 0;
   --color-base: 255, 255, 255;
   --color-main: 56, 52, 48;
   --color-caution: 216, 39, 0;
 
   @media (prefers-color-scheme: dark) {
-    --color-theme: 255, 170, 0;
-    --color-label: 255, 170, 0;
+    --color-theme: 255, 187, 0;
+    --color-label: 255, 187, 0;
     --color-base: 42, 40, 36;
     --color-main: 255, 255, 255;
     --color-caution: 255, 83, 29;
@@ -118,23 +118,15 @@ body::before {
     url("data:image/svg+xml,%3Csvg viewBox='0 0 1200 1200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noiseFilter'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.65' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noiseFilter)'/%3E%3C/svg%3E");
 }
 
-:focus-visible {
-  outline-color: rgb(@theme);
-}
-::selection {
-  background: rgb(@theme);
-  color: rgb(var(--color-base));
-}
-::marker {
-  color: rgb(@theme);
-}
-:is(
-    ::-webkit-calendar-picker-indicator,
-    ::-webkit-clear-button,
-    ::-webkit-inner-spin-button,
-    ::-webkit-outer-spin-button
-  ) {
-  color: rgb(@theme);
+// Basic DOM Style
+h1,
+h2,
+h3,
+h4,
+button,
+input,
+label {
+  line-height: 1.2;
 }
 
 p {
@@ -147,4 +139,23 @@ p {
 a,
 button {
   transition: 0.2s ease-out;
+}
+
+:focus-visible {
+  outline-color: rgb(@theme);
+}
+::selection {
+  background: rgb(@theme);
+  color: rgb(@base);
+}
+::marker {
+  color: rgb(@theme);
+}
+:is(
+    ::-webkit-calendar-picker-indicator,
+    ::-webkit-clear-button,
+    ::-webkit-inner-spin-button,
+    ::-webkit-outer-spin-button
+  ) {
+  color: rgb(@theme);
 }

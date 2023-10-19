@@ -49,11 +49,13 @@ const snsList = ["X", "note", "GitHub", "Instagram", "Pinterest"];
     display: grid;
     place-items: center;
     gap: 32px;
-    margin-top: 48px;
+    margin-top: 96px;
     padding: 64px 48px;
-    background: rgba(@label, 0.05);
+    background: rgba(@theme, 0.1);
     color: rgb(@label);
-    border-radius: 16px;
+    // Footer下端固定↓
+    position: sticky;
+    top: 100vh;
     small {
       font-size: 0.9em;
       opacity: 0.8;

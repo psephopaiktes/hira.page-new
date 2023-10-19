@@ -60,7 +60,6 @@ const {
     <Nav />
 
     <main class="l-main">
-      <h1>{title}</h1>
       <slot />
       <Footer />
     </main>
@@ -71,12 +70,11 @@ const {
       /* TODO: Fix */
       main {
         margin: 8px;
-        padding: 32px;
         border-radius: 24px;
+        border: 1px solid rgba(@label, 0.1);
         background: rgb(@base);
-        @media (width < @sm) {
-          padding: 16px;
-        }
+        overflow: hidden;
+        box-shadow: 2px 8px 48px rgba(@label, 0.3);
       }
     </style>
   </body>
