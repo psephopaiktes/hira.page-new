@@ -4,7 +4,6 @@ import mdx from "@astrojs/mdx";
 
 // https://astro.build/config
 export default defineConfig({
-  // site: "https://hira.page",
-  site: "https://hira-page-new.vercel.app",
+  site: "https://hira.page",
   integrations: [sitemap(), mdx()]
 });

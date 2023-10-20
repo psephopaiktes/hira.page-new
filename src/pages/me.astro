@@ -1,7 +1,11 @@
 ---
 import Base from "@/layouts/Base.astro";
+import ButtonLink from "@/components/ui/ButtonLink.astro";
 ---
 
-<Base title="Me">
-  <p>レイアウトに包まれたページのコンテンツ</p>
+<Base title="ME">
+  <div class="l-content">
+    <p>レイアウトに包まれたページのコンテンツ</p>
+    <ButtonLink href="/">トップページへ</ButtonLink>
+  </div>
 </Base>

@@ -1,6 +1,7 @@
 ---
 import Logo from "@/assets/logo.svg";
 
+const currentPath = Astro.url.pathname;
 const pageList = ["blog", "works", "me", "price"];
 ---
 
@@ -15,8 +16,7 @@ const pageList = ["blog", "works", "me", "price"];
     {
       pageList.map((path) => {
         // Build後はpathnameの末尾にスラシュがつくのでそれを考慮
-        const isActive =
-          `/${path}` == Astro.url.pathname || `/${path}/` == Astro.url.pathname;
+        const isActive = new RegExp(`^/${path}/?$`).test(currentPath);
 
         return (
           <li>
@@ -43,12 +43,12 @@ const pageList = ["blog", "works", "me", "price"];
   </ul>
 
   <a
-    class:list={["contact", { active: "/contact" == Astro.url.pathname }]}
+    class:list={["contact", { active: /^\/contact\/?$/.test(currentPath) }]}
     href="/contact"
     data-lottie-container
   >
     <dotlottie-player
-      autoplay={`/contact` == Astro.url.pathname ? "autoplay" : null}
+      autoplay={/^\/contact\/?$/.test(currentPath) ? "autoplay" : null}
       loop="false"
       src="/lottie/contact.lottie"></dotlottie-player>
      CONTACT

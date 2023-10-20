@@ -1,36 +1,42 @@
 ---
 import Base from "@/layouts/Base.astro";
+import Headline from "@/components/ui/Headline.astro";
+
 const FormId = import.meta.env.PUBLIC_FORMCARRY_ENDPOINT;
 ---
 
 <Base title="CONTACT">
-  <form id="js-contactForm" novalidate>
-    <label>
-      <p>返信用メールアドレス</p>
-      <input
-        id="js-email"
-        type="email"
-        name="email"
-        placeholder="hoge@mail.com"
-        required
-      />
-    </label>
+  <div class="l-content">
+    <Headline label="CONTACT" />
 
-    <label>
-      <p>お問い合わせ内容</p>
-      <textarea
-        id="js-message"
-        name="message"
-        placeholder="お問い合わせ内容"
-        rows="6"
-        required
-        minlength="10"
-        maxlength="800"></textarea>
-    </label>
+    <form id="js-contactForm" novalidate>
+      <label>
+        <p>返信用メールアドレス</p>
+        <input
+          id="js-email"
+          type="email"
+          name="email"
+          placeholder="hoge@mail.com"
+          required
+        />
+      </label>
 
-    <button id="js-submit" type="submit" disabled>送信</button>
-    <p id="js-errorText" style="color: red;"></p>
-  </form>
+      <label>
+        <p>お問い合わせ内容</p>
+        <textarea
+          id="js-message"
+          name="message"
+          placeholder="お問い合わせ内容"
+          rows="6"
+          required
+          minlength="10"
+          maxlength="800"></textarea>
+      </label>
+
+      <button id="js-submit" type="submit" disabled>送信</button>
+      <p id="js-errorText" style="color: red;"></p>
+    </form>
+  </div>
 </Base>
 
 <script define:vars={{ FormId }}>

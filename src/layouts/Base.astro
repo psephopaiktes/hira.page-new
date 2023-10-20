@@ -1,13 +1,14 @@
 ---
-import Footer from "@/components/Footer.astro";
-import Nav from "@/components/Nav.astro";
+import Footer from "@/components/ui/Footer.astro";
+import Nav from "@/components/ui/Nav.astro";
 import "@/styles/global.less";
 import { ViewTransitions } from "astro:transitions";
 
-const {
-  title = "WEBA",
+let {
+  title,
   description = "デザイナー「平田 章」のブログ兼ポートフォリオサイトです。Webフロント技術やUIデザインについてなどの情報を発信しています。",
 } = Astro.props;
+title = title ? `${title} ｜WEBA` : "WEBA";
 ---
 
 <html lang="ja">

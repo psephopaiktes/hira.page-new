@@ -1,0 +1,10 @@
+---
+import Squircle from "@/components/Squircle.astro";
+
+const { href } = Astro.props;
+---
+
+<a href={href}>
+  <Squircle />
+  <slot />
+</a>
