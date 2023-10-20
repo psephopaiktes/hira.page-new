@@ -1,11 +1,14 @@
 ---
 import Base from "@/layouts/Base.astro";
-import ButtonLink from "@/components/ui/ButtonLink.astro";
+import Squircle from "@/components/Squircle.astro";
 ---
 
 <Base title="ME">
-  <div class="l-content">
-    <p>レイアウトに包まれたページのコンテンツ</p>
-    <ButtonLink href="/">トップページへ</ButtonLink>
-  </div>
+  <Squircle /><br />
+
+  <Squircle width="480" height="80" radius="32" /><br />
+
+  <Squircle width="480" height="80" radius="32" curve="24" /><br />
+
+  <Squircle width="320" height="480" radius="32" curve="24" /><br />
 </Base>
