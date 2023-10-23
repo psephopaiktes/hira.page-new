@@ -1,17 +1,55 @@
 ---
-import Base from "@/layouts/Base.astro";
+import { SquircleDataUrl } from "@/components/SquircleDataUrl.js";
 import Headline from "@/components/ui/Headline.astro";
+import Base from "@/layouts/Base.astro";
+import SVG from "@/components/SVG.astro";
 
 const FormId = import.meta.env.PUBLIC_FORMCARRY_ENDPOINT;
+
+const inputSvgUrl = `url('${SquircleDataUrl({
+  radius: 12,
+  curve: 8,
+  fill: "#ddccbb66",
+})}')`;
+
+const btnSvgUrl = `url('${SquircleDataUrl({
+  radius: 16,
+  curve: 12,
+  fill: "#fb0",
+})}')`;
 ---
 
 <Base title="CONTACT">
   <div class="l-content">
     <Headline label="CONTACT" />
 
+    <p>
+      ご依頼、お問い合わせはこちらから。<br class="u-hideSp" />
+       料金や請負内容については
+      <a href="/price">PRICEページ</a>
+       をご確認ください。<br class="u-hideSp" />
+      <a href="https://x.com/psephopaiktes" target="_blank">
+        X <SVG symbol="open" class="u-iconInText" />
+      </a>
+       にリプライ、DMいただいても大丈夫です。<br class="u-hideSp" />
+    </p>
+
+    <section class="status">
+      <h3>現在の稼働状況</h3>
+      <ul>
+        <li>
+          <!-- 対応可能です。 -->
+           しばらく手が空かないため、基本的に新規のご依頼はお断りしております。
+        </li>
+        <li>
+          転職活動は行っておりません。エージェント様のメールにはご返事できかねます。
+        </li>
+      </ul>
+    </section>
+
     <form id="js-contactForm" novalidate>
       <label>
-        <p>返信用メールアドレス</p>
+        <span>返信用メールアドレス</span>
         <input
           id="js-email"
           type="email"
@@ -22,7 +60,7 @@ const FormId = import.meta.env.PUBLIC_FORMCARRY_ENDPOINT;
       </label>
 
       <label>
-        <p>お問い合わせ内容</p>
+        <span>お問い合わせ内容</span>
         <textarea
           id="js-message"
           name="message"
@@ -33,8 +71,15 @@ const FormId = import.meta.env.PUBLIC_FORMCARRY_ENDPOINT;
           maxlength="800"></textarea>
       </label>
 
-      <button id="js-submit" type="submit" disabled>送信</button>
-      <p id="js-errorText" style="color: red;"></p>
+      <button id="js-submit" type="submit" disabled>
+        送信
+        <SVG symbol="contact" class="u-iconInText" />
+      </button>
+
+      <p id="js-errorText">
+        <SVG symbol="caution" class="u-iconInText" />
+        <span></span>
+      </p>
     </form>
   </div>
 </Base>
@@ -51,14 +96,18 @@ const FormId = import.meta.env.PUBLIC_FORMCARRY_ENDPOINT;
 
   function validateForm() {
     if (!emailInput?.checkValidity()) {
-      errorText.textContent = "正しい形式のEmailを入力してください。";
+      errorText.style.display = "block";
+      errorText.querySelector("span").textContent =
+        "正しい形式のEmailを入力してください。";
       submitButton.setAttribute("disabled", "");
     } else if (!messageInput?.checkValidity()) {
-      errorText.textContent =
+      errorText.style.display = "block";
+      errorText.querySelector("span").textContent =
         "10文字以上、800文字以下のお問い合わせ内容を入力してください。";
       submitButton.setAttribute("disabled", "");
     } else {
-      errorText.textContent = "";
+      errorText.style.display = "none";
+      errorText.querySelector("span").textContent = "";
       submitButton.removeAttribute("disabled");
     }
   }
@@ -80,48 +129,127 @@ const FormId = import.meta.env.PUBLIC_FORMCARRY_ENDPOINT;
     })
       .then((res) => {
         if (res.ok) {
-          alert("送信しました。");
-          // TODO: Snackバーかボタン替えるか。できれば今と同じUXにしたい。
+          submitButton.textContent = "送信しました 🙆‍♀️";
           contactForm.reset();
         } else {
           // Formcarry error
-          alert("送信に失敗しました。");
+          submitButton.textContent = "サーバーエラー ❌";
         }
       })
       .catch((err) => {
         // network error
-        alert("送信に失敗しました。");
+        submitButton.textContent = "ネットワークエラー ❌";
         console.error(err);
       });
   });
 </script>
 
-<style>
-  dialog {
-    margin: auto;
-    padding: 24px;
-    border: 0;
-    border-radius: 0.6rem;
-    box-shadow: 0 0 1em black;
-    /* overscroll-behavior: contain; */
-  }
+<style lang="less" define:vars={{ inputSvgUrl, btnSvgUrl }}>
+  @import "@/styles/common.less";
 
-  dialog::backdrop {
-    background-color: rgba(0, 0, 0, 0.4);
-    backdrop-filter: blur(4px);
+  .status {
+    h3 {
+      margin-top: 16px;
+      font-size: 1em;
+    }
+    ul {
+      margin-top: 0.2em;
+    }
+    li {
+      opacity: 0.8;
+      &::before {
+        opacity: 0.4;
+        content: "※";
+      }
+    }
   }
 
   form {
-    display: flex;
-    flex-direction: column;
-  }
-
-  input,
-  textarea {
-    /* border: 2px dashed yellow; */
-  }
-
-  button:disabled {
-    opacity: 0.2;
+    margin-top: 48px;
+    max-width: 40em;
+    label {
+      display: block;
+      margin-top: 24px;
+      span {
+        margin-left: 2px;
+        letter-spacing: 0;
+        font-weight: 500;
+        &::after {
+          content: "必須";
+          font-size: 11px;
+          color: rgb(@base);
+          margin-left: 0.5em;
+          padding: 0 0.5em;
+          line-height: 1.5;
+          font-weight: 500;
+          border-radius: 3px;
+          background: rgba(@main, 0.8);
+        }
+      }
+    }
+    input,
+    textarea {
+      display: block;
+      margin-top: 8px;
+      padding: 0;
+      width: 100%;
+      color: rgb(@main);
+      outline: none;
+      caret-color: rgb(@theme);
+      font-size: 18px;
+      line-height: 1.5;
+      cursor: text;
+      appearance: none;
+      background: none;
+      border: solid 12px;
+      border-image-source: var(--inputSvgUrl);
+      border-image-slice: 12 fill;
+      opacity: 0.8;
+      &::placeholder {
+        color: rgb(@main, 0.3);
+      }
+      &:focus {
+        opacity: 1;
+        filter: drop-shadow(0 0 8px rgba(@main, 0.2));
+      }
+    }
+    textarea {
+      resize: vertical;
+    }
+    button {
+      display: block;
+      width: min(100%, 320px);
+      margin-top: 32px;
+      padding: 0;
+      background: none;
+      border: solid 16px;
+      border-image-source: var(--btnSvgUrl);
+      border-image-slice: 16 fill;
+      color: rgb(@base);
+      letter-spacing: 0.1em;
+      font-weight: 700;
+      font-size: 1.2em;
+      &:disabled {
+        opacity: 0.5;
+        color: rgba(@base, 0.5);
+        pointer-events: none;
+      }
+      &:hover,
+      &:active,
+      &:focus {
+        filter: drop-shadow(0 4px 8px rgba(@theme, 0.8));
+      }
+      :global(svg) {
+        margin-left: 0.5em;
+      }
+    }
+    #js-errorText {
+      display: none;
+      color: rgb(@caution);
+      margin-left: 4px;
+      span {
+        margin-left: 0.5em;
+      }
+    }
   }
 </style>

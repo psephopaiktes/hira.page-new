@@ -2,7 +2,6 @@
 const {
   width = 240,
   height = 240,
-  fill,
 
   // Radius Size
   radius = 120,
@@ -13,6 +12,9 @@ const {
   curve,
   curveX,
   curveY,
+
+  // Other attr like "fill"
+  ...attr
 } = Astro.props;
 
 // If the string contains a space, split into CSS border-radius format
@@ -44,5 +46,5 @@ const d = `
 ---
 
 <svg {width} {height} viewBox={`0 0 ${width} ${height}`}>
-  <path {fill} {d}></path>
+  <path {...attr} {d}></path>
 </svg>

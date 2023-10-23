@@ -18,7 +18,7 @@ title = title ? `${title} ｜WEBA` : "WEBA";
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <meta name="generator" content={Astro.generator} />
-    <!-- TODO 動的に変える ブログ詳細とか ｜WEBA に -->
+
     <title>{title}</title>
     <meta name="description" content={description} />
 
@@ -30,7 +30,7 @@ title = title ? `${title} ｜WEBA` : "WEBA";
       sizes="180x180"
       href="img/apple-touch-icon.png"
     />
-    <meta name="theme-color" content="#FFCC66" />
+    <meta name="theme-color" content="#fb0" />
     <meta name="color-scheme" content="light dark" />
 
     <!-- Font preloads -->
@@ -68,14 +68,16 @@ title = title ? `${title} ｜WEBA` : "WEBA";
     <style lang="less">
       @import "@/styles/common.less";
 
-      /* TODO: Fix */
       main {
         margin: 8px;
+        overflow: hidden;
         border-radius: 24px;
         border: 1px solid rgba(@label, 0.1);
         background: rgb(@base);
-        overflow: hidden;
         box-shadow: 2px 8px 48px rgba(@label, 0.3);
+        @media (width < @xs) {
+          border-radius: 16px;
+        }
       }
     </style>
   </body>

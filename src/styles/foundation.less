@@ -138,7 +138,11 @@ p {
 
 a,
 button {
-  transition: 0.2s ease-out;
+  transition: @transition;
+  &:hover,
+  &:active {
+    transition: @transition;
+  }
 }
 
 :focus-visible {

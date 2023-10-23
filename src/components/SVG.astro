@@ -1,15 +1,15 @@
 ---
-const { symbol, alt } = Astro.props;
+const { symbol, alt, class: className } = Astro.props;
 ---
 
 {
   alt ? (
-    <svg aria-labelledby={`title-${alt}`} role="img">
+    <svg aria-labelledby={`title-${alt}`} role="img" class={className}>
       <title id={`title-${alt}`}>{alt}</title>
       <use xlink:href={`/img/sprite.svg#${symbol.toLowerCase()}`} />
     </svg>
   ) : (
-    <svg role="presentation">
+    <svg role="presentation" class={className}>
       <use xlink:href={`/img/sprite.svg#${symbol.toLowerCase()}`} />
     </svg>
   )

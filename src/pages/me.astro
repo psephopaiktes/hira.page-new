@@ -2,11 +2,23 @@
 import Base from "@/layouts/Base.astro";
 import Squircle from "@/components/Squircle.astro";
 import { SquircleDataUrl } from "@/components/SquircleDataUrl.js";
-const url = SquircleDataUrl({ radius: "24 96", curve: 16, fill: "blue" });
+
+const url = SquircleDataUrl({
+  radius: "24",
+  curve: 16,
+  fill: "red",
+});
+const attr = {
+  stroke: "#000",
+  "stroke-width": 2,
+  "stroke-opacity": 0.5,
+};
 ---
 
 <Base title="ME">
-  <div class="test" style={`border-image-source: url('${url}')`}>aaa</div>
+  <div class="test1">
+    <div class="test" style={`border-image-source: url('${url}')`}>aaa</div>
+  </div>
 
   <Squircle radius="24" /><br />
   <Squircle width="480" height="80" radius="32" fill="red" /><br />
@@ -16,7 +28,10 @@ const url = SquircleDataUrl({ radius: "24 96", curve: 16, fill: "blue" });
     height="80"
     radius="32"
     curve="24"
-    fill="currentColor"
+    fill="none"
+    stroke="red"
+    stroke-width="4"
+    stroke-opacity="0.5"
   /><br />
 
   <Squircle width="320" height="160" radius="48 48 0 0" /><br />
@@ -29,7 +44,12 @@ const url = SquircleDataUrl({ radius: "24 96", curve: 16, fill: "blue" });
 <style lang="less">
   @import "@/styles/common.less";
 
+  .test1 {
+    color: pink;
+    --light-color: pink;
+  }
   .test {
+    --light-color: pink;
     color: green;
     margin: 80px;
     width: 800px;
@@ -40,9 +60,5 @@ const url = SquircleDataUrl({ radius: "24 96", curve: 16, fill: "blue" });
     background: none;
     border: solid 2rem;
     border-image-slice: 20 fill;
-  }
-  :global(svg) {
-    opacity: 1;
-    fill: rgba(@theme);
   }
 </style>

@@ -49,9 +49,15 @@
 }
 
 .l-content {
-  margin: 0 32px;
+  margin-inline: 64px;
+  @media (width < @xl) {
+    margin-inline: 56px;
+  }
   @media (width < @lg) {
-    margin: 0 24px;
+    margin-inline: 48px;
+  }
+  @media (width < @sm) {
+    margin-inline: 24px;
   }
 }
 

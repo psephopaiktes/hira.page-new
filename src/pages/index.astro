@@ -1,25 +1,29 @@
 ---
-import SVG from "@/components/SVG.astro";
+import Hero from "@/components/Home/Hero.astro";
+import BlogList from "@/components/Home/BlogList.astro";
+import WorksList from "@/components/Home/WorksList.astro";
 import Base from "@/layouts/Base.astro";
 ---
 
-<script>
-  import "@dotlottie/player-component";
-</script>
-
 <Base>
-  <p>レイアウトに包まれたページのコンテンツ</p>
+  <Hero />
 
-  <SVG symbol="logo" />
+  <div class="l-content">
+    <h2>BLOG</h2>
+    <BlogList />
 
-  <p>
-    あのイーハトーヴォのすきとおった風、夏でも底に冷たさをもつ青いそら、うつくしい森で飾られたモリーオ市、郊外のぎらぎらひかる草の波。
-    またそのなかでいっしょになったたくさんのひとたち、ファゼーロとロザーロ、羊飼のミーロや、顔の赤いこどもたち、地主のテーモ、山猫博士のボーガント・デストゥパーゴなど、いまこの暗い巨きな石の建物のなかで考えていると、みんなむかし風のなつかしい青い幻燈のように思われます。では、わたくしはいつかの小さなみだしをつけながら、しずかにあの年のイーハトーヴォの五月から十月までを書きつけましょう
-  </p>
+    <h2>WORKS</h2>
+    <WorksList />
+
+    <h2>ABOUT ME</h2>
+  </div>
 </Base>
 
-<style>
-  dotlottie-player {
-    width: 240px;
+<style lang="less">
+  @import "@/styles/common.less";
+
+  h2 {
+    font-size: 2em;
+    margin-top: 2rem;
   }
 </style>

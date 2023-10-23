@@ -1,6 +1,12 @@
 ---
+import { SquircleDataUrl } from "@/components/SquircleDataUrl.js";
 import Logo from "@/assets/logo.svg";
 
+const url = SquircleDataUrl({
+  radius: 16,
+  curve: 12,
+  fill: "#ffffff44",
+});
 const currentPath = Astro.url.pathname;
 const pageList = ["blog", "works", "me", "price"];
 ---
@@ -45,6 +51,7 @@ const pageList = ["blog", "works", "me", "price"];
   <a
     class:list={["contact", { active: /^\/contact\/?$/.test(currentPath) }]}
     href="/contact"
+    style={`border-image-source: url('${url}')`}
     data-lottie-container
   >
     <dotlottie-player
@@ -99,6 +106,16 @@ const pageList = ["blog", "works", "me", "price"];
       margin-top: 0;
       width: 128px;
     }
+
+    a {
+      display: block;
+      opacity: 0.9;
+      &:hover,
+      &:active {
+        opacity: 1;
+        scale: 1.04;
+      }
+    }
   }
 
   .menu {
@@ -126,7 +143,7 @@ const pageList = ["blog", "works", "me", "price"];
         clip-path: polygon(0 0, 100% 50%, 0 100%);
         background-color: #fff;
         opacity: 0.7;
-        transition: 0.2s ease-out;
+        transition: @transition;
         @media (width < @lg) {
           width: 48px;
           height: 4px;
@@ -182,29 +199,34 @@ const pageList = ["blog", "works", "me", "price"];
     height: 48px;
     justify-content: center;
     align-items: center;
-    border-radius: 8px;
     font-size: 18px;
     font-weight: 500;
     font-variation-settings: "wght" 500;
-    background: rgba(#fff, 0.2);
+    background: none;
+    border: solid 16px;
+    border-image-slice: 16 fill;
     color: rgba(#fff, 0.8);
     text-shadow: 0 0 24px rgba(#840, 0.2);
+    word-break: keep-all;
     &.active,
     &:hover,
     &:active {
-      background: rgba(#fff, 0.4);
       color: rgba(#fff, 1);
       font-variation-settings: "wght" 700;
+      filter: drop-shadow(0 0 8px rgba(#fff, 0.5));
     }
     @media (width < @lg) {
-      width: auto;
+      width: 160px;
       height: 40px;
-      padding: 0 12px 0 8px;
       position: absolute;
       top: 28px;
-      right: 0;
+      right: 2px;
+      dotlottie-player {
+        margin-left: -6px;
+      }
     }
     @media (width < @xs) {
+      width: auto;
       top: 20px;
       gap: 2px;
       font-size: 14px;

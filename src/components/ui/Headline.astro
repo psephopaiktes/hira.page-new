@@ -8,10 +8,31 @@ const { label } = Astro.props;
   @import "@/styles/common.less";
 
   h1 {
-    margin-top: 48px;
+    margin-block: 40px 32px;
+    font: 48px FuturaNowVar;
+    font-weight: 700;
+    line-height: 1.1;
+    font-variation-settings: "wght" 800;
+    letter-spacing: 0.05em;
     color: rgb(@label);
+    @media (width < @xl) {
+      margin-block: 56px 24px;
+    }
     @media (width < @lg) {
-      margin-top: 32px;
+      margin-block: 48px 16px;
+    }
+    @media (width < @sm) {
+      margin-block: 24px 8px;
+    }
+
+    &::first-letter {
+      font-size: 1.2em;
+      vertical-align: -0.02em;
+    }
+    &::after {
+      content: ".";
+      color: rgb(@theme);
+      font-size: 1.4em;
     }
   }
 </style>
