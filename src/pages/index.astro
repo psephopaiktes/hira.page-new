@@ -1,6 +1,8 @@
 ---
-import Hero from "@/components/Home/Hero.astro";
 import BlogList from "@/components/Home/BlogList.astro";
+import Headline from "@/components/Home/Headline.astro";
+import Hero from "@/components/Home/Hero.astro";
+import MeBanner from "@/components/Home/MeBanner.astro";
 import WorksList from "@/components/Home/WorksList.astro";
 import Base from "@/layouts/Base.astro";
 ---
@@ -9,13 +11,14 @@ import Base from "@/layouts/Base.astro";
   <Hero />
 
   <div class="l-content">
-    <h2>BLOG</h2>
+    <Headline href="/blog">BLOG</Headline>
     <BlogList />
 
-    <h2>WORKS</h2>
+    <Headline href="/works">WORKS</Headline>
     <WorksList />
 
-    <h2>ABOUT ME</h2>
+    <Headline href="/me">ABOUT ME</Headline>
+    <MeBanner />
   </div>
 </Base>
 

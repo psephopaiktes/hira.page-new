@@ -1,0 +1,24 @@
+---
+import SVG from "@/components/SVG.astro";
+const { href } = Astro.props;
+---
+
+<h2>
+  <a {href}>
+    <slot />
+
+    <span>
+      MORE
+      <SVG symbol="next" class="u-iconInText" />
+    </span>
+  </a>
+</h2>
+
+<style lang="less">
+  @import "@/styles/common.less";
+
+  h2 {
+    margin-top: 24px;
+    color: rgba(@label, 0.9);
+  }
+</style>

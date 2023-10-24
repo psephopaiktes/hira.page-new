@@ -5,7 +5,7 @@
     "server": "npm run sprite && astro dev --host",
     "build": "npm run sprite && astro build",
     "preview": "astro preview",
-    "sprite": "svg-sprite -s --symbol-dest 'public/img' --symbol-sprite './sprite.svg' --shape-transform-svgo svgo.json 'src/assets/svg/**/*.svg'"
+    "sprite": "svg-sprite -s --symbol-dest 'public/img' --symbol-sprite './sprite.svg' --shape-transform-svgo svgo.json 'src/assets/svg-sprite/**/*.svg'"
   },
   "dependencies": {
     "@astrojs/mdx": "^1.1.0",

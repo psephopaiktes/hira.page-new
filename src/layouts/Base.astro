@@ -23,12 +23,17 @@ title = title ? `${title} ｜WEBA` : "WEBA";
     <meta name="description" content={description} />
 
     <!-- Favicon -->
-    <link rel="icon" sizes="64x64" type="image/png" href="img/favicon.svg" />
-    <link rel="icon" sizes="192x192" href="img/android-chrome.png" />
+    <link
+      rel="icon"
+      sizes="64x64"
+      type="image/png"
+      href="img/icon/favicon.svg"
+    />
+    <link rel="icon" sizes="192x192" href="img/icon/android-chrome.png" />
     <link
       rel="apple-touch-icon"
       sizes="180x180"
-      href="img/apple-touch-icon.png"
+      href="img/icon/apple-touch-icon.png"
     />
     <meta name="theme-color" content="#fb0" />
     <meta name="color-scheme" content="light dark" />
@@ -76,6 +81,7 @@ title = title ? `${title} ｜WEBA` : "WEBA";
         background: rgb(@base);
         box-shadow: 2px 8px 48px rgba(@label, 0.3);
         @media (width < @xs) {
+          margin: 8px 8px 4px;
           border-radius: 16px;
         }
       }

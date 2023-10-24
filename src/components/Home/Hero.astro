@@ -2,17 +2,44 @@
 import SVG from "@/components/SVG.astro";
 ---
 
-<section class="hero">
-  <h1>
+<section>
+  <h1 class="l-content">
     <SVG symbol="logo" alt="WEBA" />
-    <p>Blog & Portfolio.</p>
+    <p>
+      Hi, I design & develop. <br class="u-showSp" />
+       This is My Blog & Portfolio.
+    </p>
   </h1>
 </section>
 
-<style>
-  .hero {
-    text-align: center;
-    padding: 48px;
-    background: #00000033;
+<style lang="less">
+  @import "@/styles/common.less";
+
+  section {
+    background-image: radial-gradient(
+        ellipse 160% 100% at top center,
+        rgba(@base, 0.8) 70%,
+        rgba(@base, 1) 100%
+      ),
+      url(/img/ao-sleep.webp);
+    background-size: cover;
+    background-position: right;
+    margin-bottom: -32px;
+  }
+  h1 {
+    padding: 56px 0 72px;
+    backdrop-filter: blur(2px);
+    color: rgba(@label, 0.9);
+    :global(svg) {
+      width: 200px;
+      height: 50px;
+    }
+    p {
+      margin: 16px 4px 0;
+      font-size: 14px;
+      font-weight: 500;
+      letter-spacing: 0.1em;
+      opacity: 0.6;
+    }
   }
 </style>
