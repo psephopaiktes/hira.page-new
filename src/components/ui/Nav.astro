@@ -30,11 +30,7 @@ const pageList = ["blog", "works", "me", "price"];
               <div class="navIndicator" transition:name="navIndicator" />
             )}
 
-            <a
-              class={isActive ? "active" : ""}
-              href={`/${path}`}
-              data-lottie-container
-            >
+            <a class={isActive ? "active" : ""} href={`/${path}`}>
               <dotlottie-player
                 autoplay={isActive ? "autoplay" : null}
                 loop="false"
@@ -52,7 +48,6 @@ const pageList = ["blog", "works", "me", "price"];
     class:list={["contact", { active: /^\/contact\/?$/.test(currentPath) }]}
     href="/contact"
     style={`border-image-source: url('${url}')`}
-    data-lottie-container
   >
     <dotlottie-player
       autoplay={/^\/contact\/?$/.test(currentPath) ? "autoplay" : null}
@@ -132,7 +127,7 @@ const pageList = ["blog", "works", "me", "price"];
       padding: 0 16px;
     }
     @media (width < @xs) {
-      padding: 0 32px;
+      padding: 0 24px;
     }
 
     li {

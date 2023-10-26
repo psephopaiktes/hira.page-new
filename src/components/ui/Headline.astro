@@ -2,17 +2,15 @@
 const { label } = Astro.props;
 ---
 
-<h1>{label}</h1>
+<h1 transition:name={"hedline-" + label}>{label}</h1>
 
 <style lang="less">
   @import "@/styles/common.less";
 
   h1 {
     margin-block: 40px 32px;
-    font: 48px FuturaNowVar;
-    font-weight: 700;
+    font-weight: 800;
     line-height: 1.1;
-    font-variation-settings: "wght" 800;
     letter-spacing: 0.05em;
     color: rgb(@label);
     @media (width < @xl) {
@@ -22,7 +20,7 @@ const { label } = Astro.props;
       margin-block: 48px 16px;
     }
     @media (width < @sm) {
-      margin-block: 24px 8px;
+      margin-block: 16px 8px;
     }
 
     &::first-letter {

@@ -1,5 +1,6 @@
 ---
 import WorksList from "@/components/Works/List.astro";
+import Headline from "@/components/ui/Headline.astro";
 import WorksTagFilter from "@/components/Works/TagFilter.astro";
 import Base from "@/layouts/Base.astro";
 import { getCollection } from "astro:content";
@@ -12,9 +13,12 @@ posts.sort((a, b) => b.data.pubDate.valueOf() - a.data.pubDate.valueOf());
 ---
 
 <Base title="WORKS">
-  <h2>タグ一覧</h2>
-  <WorksTagFilter />
+  <div class="l-content">
+    <Headline label="WORKS" />
+    <h2>タグ一覧</h2>
+    <WorksTagFilter />
 
-  <h2>記事リスト</h2>
-  <WorksList {posts} />
+    <h2>記事リスト</h2>
+    <WorksList {posts} />
+  </div>
 </Base>

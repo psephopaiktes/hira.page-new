@@ -1,7 +1,63 @@
 ---
-
+import { ME_DESCRIPTION } from "@/consts";
 ---
 
 <a href="/me">
-  <p>Akira HIRATA</p>
+  <div class="overlay">
+    <h3>Akira HIRATA</h3>
+    <p>{ME_DESCRIPTION}</p>
+  </div>
 </a>
+
+<style lang="less">
+  @import "@/styles/common.less";
+
+  a {
+    display: block;
+    margin-top: 16px;
+    width: 100%;
+    height: 320px;
+    border-radius: 12px;
+    background-color: rgba(@main, 0.2);
+    background-image: url("/img/hirata-1.webp");
+    background-size: 100%;
+    background-position: center;
+    border: 2px solid rgba(#fff, 0.2);
+    box-shadow: 0 16px 32px -24px rgba(@main, 0.4);
+    // TODO: コンテナクエリでアス比が16:9以上のとき、背景調整
+    // :berforeで装飾
+    .overlay {
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+      height: 100%;
+      border-radius: 12px;
+      background-color: rgba(@theme, 0.4);
+      backdrop-filter: blur(2px) grayscale(1) brightness(0.6);
+      color: #fff;
+      text-align: center;
+      transition: @transition;
+      text-shadow: 0 0 24px rgba(#000, 0.6);
+      h3 {
+        font-size: 24px;
+        font-weight: 600;
+        letter-spacing: 0.1em;
+      }
+      p {
+        width: clamp(200px, calc(100% - 48px), 40em);
+        font-size: 14px;
+        font-weight: 400;
+      }
+    }
+  }
+
+  a:hover,
+  a:active {
+    background-size: 105%;
+    .overlay {
+      backdrop-filter: none;
+      opacity: 0.4;
+    }
+  }
+</style>

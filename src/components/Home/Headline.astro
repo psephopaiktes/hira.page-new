@@ -1,16 +1,18 @@
 ---
 import SVG from "@/components/SVG.astro";
-const { href } = Astro.props;
+const { label, href } = Astro.props;
 ---
 
-<h2>
+<h2 transition:name={"hedline-" + label}>
   <a {href}>
-    <slot />
-
     <span>
-      MORE
-      <SVG symbol="next" class="u-iconInText" />
+      {label}
     </span>
+
+    <small>
+      more
+      <SVG symbol="next" />
+    </small>
   </a>
 </h2>
 
@@ -18,7 +20,44 @@ const { href } = Astro.props;
   @import "@/styles/common.less";
 
   h2 {
-    margin-top: 24px;
-    color: rgba(@label, 0.9);
+    position: relative; // for z-index
+    margin-top: 32px;
+    color: rgb(@label);
+    &::first-letter {
+      font-size: 1.2em;
+    }
+  }
+
+  span {
+    font-weight: 800;
+    line-height: 1.1;
+    letter-spacing: 0.05em;
+    &::after {
+      content: ".";
+      color: rgb(@theme);
+      font-size: 1.4em;
+    }
+  }
+
+  a small {
+    font-size: 0.8em;
+    margin-left: 0.4em;
+    font-variation-settings: "wght" 500;
+    color: rgb(@main);
+    opacity: 0.6;
+    transition: @transition;
+    vertical-align: bottom;
+    :global(svg) {
+      margin: 0 -0.3em;
+      fill: currentColor;
+      width: 1em;
+      height: 1em;
+      vertical-align: middle;
+    }
+  }
+  :is(a:hover, a:active) small {
+    opacity: 1;
+    color: rgba(@main, 0.9);
+    font-variation-settings: "wght" 700;
   }
 </style>
