@@ -1,5 +1,6 @@
 ---
 import BlogList from "@/components/Home/BlogList.astro";
+import ContactInfo from "@/components/Home/ContactInfo.astro";
 import Headline from "@/components/Home/Headline.astro";
 import Hero from "@/components/Home/Hero.astro";
 import MeBanner from "@/components/Home/MeBanner.astro";
@@ -17,8 +18,11 @@ import Base from "@/layouts/Base.astro";
     <Headline href="/works" label="WORKS" />
     <WorksList />
 
-    <Headline href="/me" label="ABOUT ME" />
+    <Headline label="ABOUT ME" />
     <MeBanner />
+
+    <Headline label="Get in Touch" />
+    <ContactInfo />
   </div>
 </Base>
 

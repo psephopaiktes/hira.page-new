@@ -1,6 +1,4 @@
 ---
-import SVG from "@/components/SVG.astro";
-
 import { Image } from "astro:assets";
 import AoSleepImage from "@/assets/img/ao-sleep.webp";
 ---
@@ -20,7 +18,7 @@ import AoSleepImage from "@/assets/img/ao-sleep.webp";
     loading="eager"
   />
   <h1 class="l-content">
-    <SVG symbol="logo" alt="WEBA" />
+    <dotlottie-player autoplay src="/lottie/weba.lottie"></dotlottie-player>
     <p>
       Hi, I design & develop. <br class="u-showSp" />
        This is My Blog & Portfolio.
@@ -58,6 +56,9 @@ import AoSleepImage from "@/assets/img/ao-sleep.webp";
     display: grid;
     height: 240px;
     margin-bottom: -48px;
+    @media (width < @xs) {
+      height: 320px;
+    }
     > * {
       grid-area: 1/-1;
     }
@@ -71,6 +72,9 @@ import AoSleepImage from "@/assets/img/ao-sleep.webp";
         rgba(@base, 1) 100%
       );
       background-size: 100%;
+      @media (width < @xs) {
+        backdrop-filter: blur(1px);
+      }
     }
   }
   img {
@@ -79,18 +83,29 @@ import AoSleepImage from "@/assets/img/ao-sleep.webp";
     min-height: 0;
     object-fit: cover;
     object-position: right;
+    @media (width < @xs) {
+      object-position: 80% center;
+    }
   }
   h1 {
     z-index: 1;
     margin-block: auto;
-    :global(svg) {
-      color: rgba(@theme, 0.9);
+    @media (width < @xs) {
+      display: grid;
+      place-items: center;
+      text-align: center;
+    }
+    dotlottie-player {
       width: 160px;
-      height: 40px;
-      filter: drop-shadow(0 0 24px rgba(@base, 1));
+      aspect-ratio: 4/1;
+      @media (width < @lg) {
+        width: 120px;
+      }
     }
     p {
-      color: rgba(@label, 0.7);
+      margin: 16px 4px 0;
+      line-height: 1.8;
+      color: rgba(@label, 0.8);
       font-size: 14px;
       font-weight: 400;
       letter-spacing: 0.1em;

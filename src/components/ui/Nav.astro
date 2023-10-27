@@ -33,7 +33,6 @@ const pageList = ["blog", "works", "me", "price"];
             <a class={isActive ? "active" : ""} href={`/${path}`}>
               <dotlottie-player
                 autoplay={isActive ? "autoplay" : null}
-                loop="false"
                 src={`/lottie/${path}.lottie`}
               />
               {path.toUpperCase()}
@@ -51,7 +50,6 @@ const pageList = ["blog", "works", "me", "price"];
   >
     <dotlottie-player
       autoplay={/^\/contact\/?$/.test(currentPath) ? "autoplay" : null}
-      loop="false"
       src="/lottie/contact.lottie"></dotlottie-player>
      CONTACT
   </a>

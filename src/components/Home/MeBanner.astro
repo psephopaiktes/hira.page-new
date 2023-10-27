@@ -2,7 +2,7 @@
 import { ME_DESCRIPTION } from "@/consts";
 ---
 
-<a href="/me">
+<a href="/me" class="c-card">
   <div class="overlay">
     <img
       width="120"
@@ -19,17 +19,12 @@ import { ME_DESCRIPTION } from "@/consts";
   @import "@/styles/common.less";
 
   a {
-    display: block;
-    overflow: hidden;
     margin-top: 16px;
     width: 100%;
-    height: auto;
-    border-radius: 12px;
     background-color: rgba(@main, 0.2);
     background-image: url("/img/hirata-1.webp");
     background-size: 100%;
     background-position: center;
-    box-shadow: 0 16px 32px -24px rgba(@main, 0.4);
     @media (width < @xs) {
       background-size: auto 100%;
     }

@@ -114,6 +114,8 @@ const btnSvgUrl = `url('${SquircleDataUrl({
 
   contactForm?.addEventListener("submit", (e) => {
     e.preventDefault();
+    submitButton.textContent = "送信中...";
+    submitButton.setAttribute("disabled", "");
 
     fetch(`https://formcarry.com/s/${FormId}`, {
       recapture: false,
@@ -129,7 +131,7 @@ const btnSvgUrl = `url('${SquircleDataUrl({
     })
       .then((res) => {
         if (res.ok) {
-          submitButton.textContent = "送信しました 🙆‍♀️";
+          submitButton.textContent = "送信しました";
           contactForm.reset();
         } else {
           // Formcarry error
@@ -230,7 +232,7 @@ const btnSvgUrl = `url('${SquircleDataUrl({
       font-weight: 700;
       font-size: 1.2em;
       &:disabled {
-        opacity: 0.5;
+        opacity: 0.7;
         color: rgba(@base, 0.5);
         pointer-events: none;
       }

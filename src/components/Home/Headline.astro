@@ -4,16 +4,20 @@ const { label, href } = Astro.props;
 ---
 
 <h2 transition:name={"hedline-" + label}>
-  <a {href}>
-    <span>
-      {label}
-    </span>
+  {
+    href ? (
+      <a {href}>
+        <span>{label}</span>
 
-    <small>
-      more
-      <SVG symbol="next" />
-    </small>
-  </a>
+        <small>
+          more
+          <SVG symbol="next" />
+        </small>
+      </a>
+    ) : (
+      <span>{label}</span>
+    )
+  }
 </h2>
 
 <style lang="less">
@@ -21,8 +25,13 @@ const { label, href } = Astro.props;
 
   h2 {
     position: relative; // for z-index
-    margin-top: 32px;
+    font-size: 24px;
+    margin-top: 64px;
     color: rgb(@label);
+    @media (width < @lg) {
+      margin-top: 48px;
+      font-size: 20px;
+    }
     &::first-letter {
       font-size: 1.2em;
     }
@@ -51,7 +60,7 @@ const { label, href } = Astro.props;
       margin: 0 -0.3em;
       fill: currentColor;
       width: 1em;
-      height: 1em;
+      aspect-ratio: 1 / 1;
       vertical-align: middle;
     }
   }
