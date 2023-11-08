@@ -38,13 +38,13 @@ import { ME_DESCRIPTION } from "@/consts";
       position: relative;
       height: 100%;
       padding: 64px 32px;
-      border: 2px solid rgba(#fff, 0.2);
-      background-color: rgba(@theme, 0.4);
-      backdrop-filter: blur(2px) grayscale(1) brightness(0.6);
-      color: #fff;
+      border: 4px solid rgba(@main, 0.1);
+      box-sizing: content-box;
+      background-color: rgba(@base, 0.7);
+      backdrop-filter: blur(3px) grayscale(0.4);
+      color: rgba(@main, 1);
       border-radius: 12px;
       transition: @transition;
-      text-shadow: 0 0 24px rgba(#000, 0.6);
       @media (width < @lg) {
         gap: 8px 16px;
         padding: 32px 24px;
@@ -63,11 +63,11 @@ import { ME_DESCRIPTION } from "@/consts";
         position: absolute;
         z-index: -1;
         width: 800px;
-        height: 800px;
+        height: 1200px;
         transform-origin: left center;
-        rotate: 20deg;
-        background: rgba(@theme, 0.2);
-        top: calc(50% - 400px);
+        rotate: 45deg;
+        background: rgba(@theme, 0.25);
+        top: calc(50% - 600px);
         left: 50%;
       }
 
@@ -114,7 +114,7 @@ import { ME_DESCRIPTION } from "@/consts";
     }
     .overlay {
       backdrop-filter: none;
-      opacity: 0.6;
+      opacity: 0.5;
       filter: blur(4px);
     }
   }

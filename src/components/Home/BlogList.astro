@@ -1,12 +1,36 @@
 ---
+import { Image } from "astro:assets";
+import { getCollection } from "astro:content";
 
+const posts = await getCollection("blog");
+
+posts.sort((a, b) => b.data.pubDate.valueOf() - a.data.pubDate.valueOf());
+// 3つか5つ程度まで制限
 ---
 
 <ul>
-  <li>
-    <a href="/blog/first-post">First Post</a>
-  </li>
-  <li>
-    <a href="/blog/first-post">First Post</a>
-  </li>
+  {
+    posts.map((post) => (
+      <li>
+        <a href={`/blog/${post.slug}/`}>
+          <Image
+            src={post.data.cover}
+            alt={post.data.title}
+            transition:name={post.slug}
+          />
+          <h4 class="title">{post.data.title}</h4>
+          <p>{post.data.pubDate.toDateString()}</p>
+          // TODO: Tag2つ表示 // 日付
+        </a>
+      </li>
+    ))
+  }
 </ul>
+
+<style lang="less">
+  @import "@/styles/common.less";
+  ul {
+    margin-top: 16px;
+    display: flex;
+  }
+</style>

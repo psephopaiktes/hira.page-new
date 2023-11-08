@@ -207,6 +207,10 @@ const btnSvgUrl = `url('${SquircleDataUrl({
       border-image-source: var(--inputSvgUrl);
       border-image-slice: 12 fill;
       opacity: 0.8;
+      &:user-invalid {
+        color: rgb(@caution);
+        border-color: red;
+      }
       &::placeholder {
         color: rgb(@main, 0.3);
       }

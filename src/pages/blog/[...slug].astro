@@ -22,7 +22,7 @@ const { Content } = await post.render();
     transition:name={post.slug}
   />
 
-  <p>{post.data.pubDate.toDateString()}</p>
+  <time>{post.data.pubDate.toDateString()}</time>
   <p>
     {
       post.data.updatedDate && (
