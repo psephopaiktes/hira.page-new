@@ -1,11 +1,41 @@
 ---
 import Headline from "@/components/ui/Headline.astro";
 import Base from "@/layouts/Base.astro";
+import Squircle from "@/components/Squircle.astro";
 ---
 
 <Base title="PRICE">
   <div class="l-content">
     <Headline label="PRICE" />
     <p>レイアウトに包まれたページのコンテンツ</p>
+
+    <!-- <Squircle id="test" /> -->
+    <svg width="240" height="240" viewBox="0 0 240 240">
+      <clipPath id="ellipse">
+        <path
+          d="M 0,120
+        C 0,0 0,0 120,0
+          S 0,0 120,0
+          240,0 240,120
+          240,0 240,120
+          240,240 120,240
+          240,240 120,240
+          0,240 0,120
+          0,240 0,120"
+        ></path>
+      </clipPath>
+    </svg>
+
+    <button>test</button>
   </div>
 </Base>
+
+<style>
+  button {
+    width: 240px;
+    height: 240px;
+    background: red;
+    clip-path: url(#ellipse);
+    filter: drop-shadow(0 0 8px blue);
+  }
+</style>

@@ -32,8 +32,7 @@ const ry = parseInput(radiusY);
 const cx = parseInput(curveX || curve || radiusX || radius);
 const cy = parseInput(curveY || curve || radiusY || radius);
 
-const d = `
-  M 0,${ry[0]}
+const d = `M 0,${ry[0]}
   C 0,${ry[0] - cy[0]} ${rx[0] - cx[0]},0 ${rx[0]},0
   S ${width - rx[1] - cx[1]},0 ${width - rx[1]},0
     ${width},${ry[1] - cy[1]} ${width},${ry[1]}
@@ -41,8 +40,7 @@ const d = `
     ${width - rx[2] + cx[2]},${height} ${width - rx[2]},${height}
     ${rx[3] + cx[3]},${height} ${rx[3]},${height}
     0,${height - ry[3] + cy[3]} 0,${height - ry[3]}
-    0,${ry[0] + cy[0]} 0,${ry[0]}
-`;
+    0,${ry[0] + cy[0]} 0,${ry[0]}`;
 ---
 
 <svg {width} {height} viewBox={`0 0 ${width} ${height}`}>
