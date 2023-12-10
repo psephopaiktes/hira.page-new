@@ -4,7 +4,9 @@ import Squircle from "@/components/Squircle.astro";
 import { SquircleDataUrl } from "@/components/SquircleDataUrl.js";
 
 const url = SquircleDataUrl({
-  radius: "24",
+  radius: 24,
+  width: 240,
+  height: 240,
   curve: 16,
   fill: "red",
 });
@@ -16,10 +18,6 @@ const attr = {
 ---
 
 <Base title="ME">
-  <div class="test1">
-    <div class="test" style={`border-image-source: url('${url}')`}>aaa</div>
-  </div>
-
   <Squircle radius="24" /><br />
   <Squircle width="480" height="80" radius="32" fill="red" /><br />
 
@@ -43,22 +41,4 @@ const attr = {
 
 <style lang="less">
   @import "@/styles/common.less";
-
-  .test1 {
-    color: pink;
-    --light-color: pink;
-  }
-  .test {
-    --light-color: pink;
-    color: green;
-    margin: 80px;
-    width: 800px;
-    height: 800px;
-    overflow: hidden;
-    align-items: center;
-    padding: 0;
-    background: none;
-    border: solid 2rem;
-    border-image-slice: 20 fill;
-  }
 </style>
