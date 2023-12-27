@@ -23,6 +23,7 @@ const pageList = ["blog", "works", "me", "price"];
       pageList.map((path) => {
         // Build後はpathnameの末尾にスラシュがつくのでそれを考慮
         const isActive = new RegExp(`^/${path}/?$`).test(currentPath);
+        // TODO: Perfect Is Active みたいな アニメーションは完全一致時のみ
 
         return (
           <li>

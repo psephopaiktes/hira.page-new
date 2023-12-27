@@ -9,10 +9,22 @@ const { title, description } = Astro.props;
   <head prefix="og: https://ogp.me/ns#">
     <BaseMeta title={title} description={description} />
 
-    <!-- TODO: Basic OG -->
+    <!-- TODO: OG -->
+
+    <style lang="less" is:global>
+      @import "@/styles/common.less";
+
+      article {
+        > * {
+          margin: 1em 0 0;
+        }
+      }
+    </style>
   </head>
 
   <CommonBody>
     <slot />
   </CommonBody>
+
+
 </html>

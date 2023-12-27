@@ -1,29 +1,55 @@
 ---
+import "@/styles/global.less";
+import { ViewTransitions } from "astro:transitions";
 
+let {
+  title,
+  description = "デザイナー「平田 章」のブログ兼ポートフォリオサイトです。Webフロント技術やUIデザインなどの情報を発信しています。",
+} = Astro.props;
+
+title = title ? `${title} ｜WEBA` : "WEBA";
+// TODO 統合
 ---
 
-<body class="l-body">
-  <Nav />
+<title>{title}</title>
+<meta name="description" content={description} />
 
-  <main class="l-main">
-    <slot />
-    <Footer />
-  </main>
+<ViewTransitions />
 
-  <style lang="less">
-    @import "@/styles/common.less";
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<meta name="generator" content={Astro.generator} />
 
-    main {
-      margin: 8px;
-      overflow: hidden;
-      border-radius: 24px;
-      border: 1px solid rgba(@label, 0.1);
-      background: rgb(@base);
-      box-shadow: 2px 8px 48px rgba(@label, 0.3);
-      @media (width < @xs) {
-        margin-bottom: 0;
-        border-radius: 0;
-      }
-    }
-  </style>
-</body>
+<!-- Favicon -->
+<link rel="icon" sizes="64x64" type="image/png" href="img/icon/favicon.svg" />
+<link rel="icon" sizes="192x192" href="img/icon/android-chrome.png" />
+<link
+  rel="apple-touch-icon"
+  sizes="180x180"
+  href="img/icon/apple-touch-icon.png"
+/>
+<meta name="theme-color" content="#fb0" />
+<meta name="color-scheme" content="light dark" />
+
+<!-- Font preloads -->
+<link
+  rel="preload"
+  href="/font/Regular.woff2"
+  as="font"
+  type="font/woff2"
+  crossorigin
+/>
+<link
+  rel="preload"
+  href="/font/Bold.woff2"
+  as="font"
+  type="font/woff2"
+  crossorigin
+/>
+<link
+  rel="preload"
+  href="/font/FuturaNowVar.woff2"
+  as="font"
+  type="font/woff2"
+  crossorigin
+/>

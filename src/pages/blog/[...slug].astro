@@ -1,5 +1,5 @@
 ---
-import Base from "@/layouts/Base.astro";
+import Blog from "@/layouts/Blog.astro";
 import { Image } from "astro:assets";
 import { getCollection } from "astro:content";
 
@@ -17,7 +17,7 @@ const { post } = Astro.props;
 const { Content } = await post.render();
 ---
 
-<Base title={post.data.title}>
+<Blog title={post.data.title}>
   <article>
     <header>
       <Image
@@ -51,7 +51,7 @@ const { Content } = await post.render();
 
     <Content />
   </article>
-</Base>
+</Blog>
 
 <style lang="less">
   @import "@/styles/common.less";
@@ -80,14 +80,6 @@ const { Content } = await post.render();
       @media (width < @xs) {
         border-radius: 0;
       }
-    }
-  }
-
-  // 本文エリア
-  article {
-    h2 {
-      background: red;
-      opacity: 0.1;
     }
   }
 </style>
