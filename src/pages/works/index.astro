@@ -8,7 +8,7 @@ import { getCollection } from "astro:content";
 const posts = await getCollection("works");
 const tags = [...new Set(posts.map((post) => post.data.tags).flat())];
 
-posts.sort((a, b) => b.data.pubDate.valueOf() - a.data.pubDate.valueOf());
+posts.sort((a, b) => b.data.date.valueOf() - a.data.date.valueOf());
 // TODO: Works SortはHTML側に書くと並び替えできる?
 ---
 

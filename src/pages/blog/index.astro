@@ -5,10 +5,12 @@ import BlogTagFilter from "@/components/Blog/TagFilter.astro";
 import Base from "@/layouts/Base.astro";
 import { getCollection } from "astro:content";
 
-const posts = await getCollection("blog");
+const posts = await getCollection("blog", ({ data }) => {
+  return import.meta.env.PROD ? data.draft !== true : true;
+});
 const tags = [...new Set(posts.map((post) => post.data.tags).flat())];
 
-posts.sort((a, b) => b.data.pubDate.valueOf() - a.data.pubDate.valueOf());
+posts.sort((a, b) => b.data.date.valueOf() - a.data.date.valueOf());
 // TODO: Works SortはHTML側に書くと並び替えできる?
 ---
 

@@ -5,8 +5,9 @@ const blog = defineCollection({
     z.object({
       title: z.string(),
       description: z.string(),
-      pubDate: z.coerce.date(),
+      date: z.coerce.date(),
       updatedDate: z.coerce.date().optional(),
+      draft: z.boolean().optional(),
       cover: image().refine((img) => img.width >= 600, {
         message: "カバー画像は幅600ピクセル以上でなければなりません",
       }),
@@ -19,7 +20,7 @@ const works = defineCollection({
     z.object({
       title: z.string(),
       description: z.string(),
-      pubDate: z.coerce.date(),
+      date: z.coerce.date(),
       updatedDate: z.coerce.date().optional(),
       cover: image().refine((img) => img.width >= 600, {
         message: "カバー画像は幅600ピクセル以上でなければなりません",

@@ -2,9 +2,11 @@
 import { Image } from "astro:assets";
 import { getCollection } from "astro:content";
 
-const posts = await getCollection("blog");
+const posts = await await getCollection("blog", ({ data }) => {
+  return import.meta.env.PROD ? data.draft !== true : true;
+});
 
-posts.sort((a, b) => b.data.pubDate.valueOf() - a.data.pubDate.valueOf());
+posts.sort((a, b) => b.data.date.valueOf() - a.data.date.valueOf());
 // 3つか5つ程度まで制限
 ---
 
@@ -19,7 +21,7 @@ posts.sort((a, b) => b.data.pubDate.valueOf() - a.data.pubDate.valueOf());
             transition:name={post.slug}
           />
           <h4 class="title">{post.data.title}</h4>
-          <p>{post.data.pubDate.toDateString()}</p>
+          <p>{post.data.date.toDateString()}</p>
           // TODO: Tag2つ表示 // 日付
         </a>
       </li>

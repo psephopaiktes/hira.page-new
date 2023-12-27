@@ -4,7 +4,9 @@ import { Image } from "astro:assets";
 import { getCollection } from "astro:content";
 
 export async function getStaticPaths() {
-  const posts = await getCollection("blog");
+  const posts = await getCollection("blog", ({ data }) => {
+    return import.meta.env.PROD ? data.draft !== true : true;
+  });
   return posts.map((post) => ({
     params: { slug: post.slug },
     props: { post },
@@ -16,34 +18,73 @@ const { Content } = await post.render();
 ---
 
 <Base title={post.data.title}>
-  <Image
-    src={post.data.cover}
-    alt={post.data.title}
-    transition:name={post.slug}
-  />
+  <article>
+    <header>
+      <Image
+        src={post.data.cover}
+        alt={post.data.title}
+        transition:name={post.slug}
+      />
 
-  <time>{post.data.pubDate.toDateString()}</time>
-  <p>
-    {
-      post.data.updatedDate && (
-        <div class="last-updated-on">
-          Last updated on <span>{post.data.updatedDate.toDateString()}</span>
-        </div>
-      )
-    }
-  </p>
+      <h1>{post.data.title}</h1>
 
-  <ul>
-    {
-      post.data.tags.map((tag) => (
-        <li>
-          <a href={`/blog/tag/${tag}/`}>{tag}</a>
-        </li>
-      ))
-    }
-  </ul>
+      <time>{post.data.date.toDateString()}</time>
+      {
+        post.data.updatedDate && (
+          <>
+            更新:
+            <time>{post.data.updatedDate.toDateString()}</time>
+          </>
+        )
+      }
 
-  <main>
+      <ul>
+        {
+          post.data.tags.map((tag) => (
+            <li>
+              <a href={`/blog/tag/${tag}/`}>{tag}</a>
+            </li>
+          ))
+        }
+      </ul>
+    </header>
+
     <Content />
-  </main>
+  </article>
 </Base>
+
+<style lang="less">
+  @import "@/styles/common.less";
+
+  article {
+    margin: 80px auto 0;
+    max-width: 800px;
+    @media (width < @xl) {
+      margin: 0;
+      padding: 16px;
+    }
+  }
+
+  header {
+    @media (width < @xl) {
+      margin: -16px -16px 0;
+    }
+    img {
+      display: block;
+      border-radius: 6px;
+      border: 2px solid rgba(@main, 0.1);
+      @media (width < @xl) {
+        border-radius: 0;
+        border-width: 0 0 2px;
+      }
+    }
+  }
+
+  // 本文エリア
+  article {
+    h2 {
+      background: red;
+      opacity: 0.1;
+    }
+  }
+</style>
