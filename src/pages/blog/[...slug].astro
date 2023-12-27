@@ -72,10 +72,13 @@ const { Content } = await post.render();
     img {
       display: block;
       border-radius: 6px;
-      border: 2px solid rgba(@main, 0.1);
+      border: 1px solid rgba(@main, 0.1);
       @media (width < @xl) {
+        border-radius: 24px 24px 0 0;
+        border-width: 0 0 1px;
+      }
+      @media (width < @xs) {
         border-radius: 0;
-        border-width: 0 0 2px;
       }
     }
   }
