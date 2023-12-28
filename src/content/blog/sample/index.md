@@ -37,8 +37,6 @@ cover: './cover.png'
 - この文章に脚注をつける.[^1]
 - この文章に脚注をつける.[^2]
 - [LINK](https://gohugo.io/)
-- "自動でダブルクォートを整形"
-- ダッシュは---長くつなげます
 - [ ] 未完了チェック
 - [x] 完了チェック
 
@@ -47,31 +45,32 @@ cover: './cover.png'
 
 > 引用 Lorem Lorem Lorem Lorem Lorem Lorem Lorem Lorem Lorem Lorem Lorem 
 
+<small>※ Smallテキスト</small>
+
 ## Link
 - URLは自動的にリンク配置: https://gohugo.io/
-- <a href="https://gohugo.io/">html link</a>
+- <a href="https://gohugo.io/" target="brank_">html link</a>
 - [HoverでTitleが出るリンク](https://gohugo.io/ "ウェーイ")
-- `[]()`のMarkdownLinkで書かないと新しいタブで開かないので、できるだけそれを使う
 
 
 ## Definition lists
-Cat
-: Fluffy animal everyone likes
+<dl>
+    <dt>Cat</dt>
+    <dd>Fluffy animal everyone likes</dd>
+</dl>
 
-Internet
-: Vector of transmission for pictures of cats
 
 ## IMG
-通常のimgタグ↓はAMPではエラー
+
 ```md
 ![代替えテキスト](https://source.unsplash.com/random "Hover時のタイトル")
 ```
-shortcodeを使って自動生成させる。画像は自動で縮小される。
-```html
-{ {< img src="cat.jpg" alt="代替テキスト" > }}
-```
-{{< img src="cat.jpg" alt="代替テキスト" >}}
-{{< img src="ss.png" alt="代替テキスト" >}}
+
+![代替えテキスト](https://source.unsplash.com/random "Hover時のタイトル")
+
+<small class="reference">
+    参照: <a href="https://unsplash.com/" target="_blank">Unsplash</a>
+</small>
 
 ---
 
@@ -89,8 +88,8 @@ aa | aa | aa
 ## CODE Highlight
 
 #### test.js
-コードハイライトもかんたん！
-```js {hl_lines=[2, "5-6"]}
+
+```js
 var elm = document.getElementById('gotop');
 
     window.addEventListener('scroll', function()
@@ -101,8 +100,7 @@ var elm = document.getElementById('gotop');
 ```
 
 #### test.html
-その他のオプションは[このへん](https://gohugo.io/content-management/syntax-highlighting/)
-```html {linenos=false,linenostart=199}
+```html
 <!DOCTYPE html>
 <html lang="en">
 <head>

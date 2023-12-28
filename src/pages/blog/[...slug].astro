@@ -1,5 +1,6 @@
 ---
 import Blog from "@/layouts/Blog.astro";
+import SVG from "@/components/SVG.astro";
 import { Image } from "astro:assets";
 import { getCollection } from "astro:content";
 
@@ -14,7 +15,7 @@ export async function getStaticPaths() {
 }
 
 const { post } = Astro.props;
-const { Content } = await post.render();
+const { Content, headings } = await post.render();
 ---
 
 <Blog title={post.data.title}>
@@ -26,30 +27,60 @@ const { Content } = await post.render();
         transition:name={post.slug}
       />
 
-      <h1>{post.data.title}</h1>
+      <div class="meta">
+        <h1>{post.data.title}</h1>
 
-      <time>{post.data.date.toDateString()}</time>
-      {
-        post.data.updatedDate && (
-          <>
-            更新:
-            <time>{post.data.updatedDate.toDateString()}</time>
-          </>
-        )
-      }
-
-      <ul>
+        <time datetime={post.data.date.toISOString()}>
+          <SVG symbol="date" class="u-iconInText" />
+          {post.data.date.toLocaleDateString()}
+        </time>
         {
-          post.data.tags.map((tag) => (
-            <li>
-              <a href={`/blog/tag/${tag}/`}>{tag}</a>
-            </li>
-          ))
+          post.data.updatedDate && (
+            <time datetime={post.data.updatedDate.toISOString()}>
+              <SVG symbol="update" class="u-iconInText" />
+              {post.data.updatedDate.toLocaleDateString()} 更新
+            </time>
+          )
         }
-      </ul>
+
+        <ul>
+          {
+            post.data.tags.map((tag) => (
+              <li>
+                <a href={`/blog/tag/${tag}/`}>{tag}</a>
+              </li>
+            ))
+          }
+        </ul>
+
+        <p>{post.data.description}</p>
+      </div>
     </header>
 
-    <Content />
+    <aside>
+      <h2>Index</h2>
+      <ul>
+        {
+          headings.map((heading) =>
+            heading.depth === 2 ? (
+              <li>
+                <a href={"#" + heading.slug}>{heading.text}</a>
+              </li>
+            ) : heading.depth === 3 ? (
+              <li>
+                <a class="indent" href={"#" + heading.slug}>
+                  {heading.text}
+                </a>
+              </li>
+            ) : null,
+          )
+        }
+      </ul>
+    </aside>
+
+    <div class="content">
+      <Content />
+    </div>
   </article>
 </Blog>
 
@@ -57,22 +88,34 @@ const { Content } = await post.render();
   @import "@/styles/common.less";
 
   article {
-    margin: 80px auto 0;
-    max-width: 800px;
+    display: grid;
+    padding: 32px;
+    gap: 0 32px;
+    grid-template-columns: 800px 1fr;
+    grid-template-areas:
+      "header toc"
+      "content toc";
+    @media (width < @2xl) {
+      grid-template-columns: 640px 1fr;
+    }
     @media (width < @xl) {
-      margin: 0;
-      padding: 16px;
+      gap: 0 16px;
+      grid-template-columns: 100%;
+      grid-template-areas:
+        "header"
+        "toc"
+        "content";
+      padding: 0;
     }
   }
 
   header {
-    @media (width < @xl) {
-      margin: -16px -16px 0;
-    }
+    grid-area: header;
+
     img {
       display: block;
       border-radius: 6px;
-      border: 1px solid rgba(@main, 0.1);
+      border: 1px solid rgba(@main, 0.05);
       @media (width < @xl) {
         border-radius: 24px 24px 0 0;
         border-width: 0 0 1px;
@@ -80,6 +123,117 @@ const { Content } = await post.render();
       @media (width < @xs) {
         border-radius: 0;
       }
+    }
+
+    .meta {
+      @media (width < @xl) {
+        padding: 0 32px;
+      }
+      @media (width < @xs) {
+        padding: 0 16px;
+      }
+    }
+
+    h1 {
+      margin-top: 24px;
+      font-size: 2em;
+    }
+
+    time {
+      font-size: 0.9em;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      gap: 0.5em;
+      margin-top: 20px;
+      margin-right: 16px;
+      color: rgba(@main, 0.6);
+    }
+
+    ul {
+      display: flex;
+      float: right;
+      margin-top: 18px;
+      gap: 8px;
+      a {
+        font-size: 0.8em;
+        display: block;
+        height: 28px;
+        line-height: 24px;
+        padding: 0 10px;
+        border-radius: 14px;
+        letter-spacing: 0.05em;
+        background: rgba(@theme, 0.2);
+        color: rgb(@label);
+      }
+      @media (width < @xs) {
+        float: none;
+      }
+    }
+
+    p {
+      margin-top: 16px;
+      font-size: 0.9em;
+    }
+  }
+
+  aside {
+    grid-area: toc;
+    padding: 4px;
+    @media (width < @xl) {
+      padding: 20px;
+      margin: 16px 32px 0;
+      border-radius: 6px;
+      background: rgba(@main, 0.04);
+    }
+    @media (width < @xs) {
+      margin-inline: 16px;
+    }
+
+    h2 {
+      font-size: 18px;
+      opacity: 0.2;
+    }
+
+    ul {
+      position: sticky;
+      top: 24px;
+      margin-top: 16px;
+      @media (width < @xl) {
+        margin-top: 12px;
+      }
+    }
+
+    a {
+      display: block;
+      padding: 4px 12px;
+      font-size: 0.8em;
+      border-left: 1px solid rgba(@main, 0.4);
+      opacity: 0.4;
+      &.indent {
+        padding-left: 28px;
+        border-color: rgba(@main, 0.1);
+      }
+      &:hover {
+        background: rgba(@theme, 0.1);
+        opacity: 0.8;
+      }
+      @media (width < @xl) {
+        opacity: 0.6;
+        text-overflow: ellipsis;
+        overflow: hidden;
+        white-space: nowrap;
+      }
+    }
+  }
+
+  .content {
+    grid-area: content;
+    @media (width < @xl) {
+      padding: 0 32px;
+    }
+    @media (width < @xs) {
+      padding: 0 16px;
     }
   }
 </style>
