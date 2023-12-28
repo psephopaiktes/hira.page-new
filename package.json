@@ -8,11 +8,11 @@
     "sprite": "svg-sprite -s --symbol-dest 'public/img' --symbol-sprite './sprite.svg' --shape-transform-svgo svgo.json 'src/assets/svg-sprite/**/*.svg'"
   },
   "dependencies": {
-    "@astrojs/mdx": "^1.1.0",
-    "@astrojs/rss": "^3.0.0",
-    "@astrojs/sitemap": "^3.0.0",
+    "@astrojs/mdx": "^2.0.3",
+    "@astrojs/rss": "^4.0.1",
+    "@astrojs/sitemap": "^3.0.4",
     "@dotlottie/player-component": "^2.7.0",
-    "astro": "^3.2.0",
+    "astro": "^4.0.8",
     "less": "^4.2.0"
   },
   "devDependencies": {
