@@ -61,7 +61,7 @@ import EmbedCard from '@/components/Blog/EmbedCard.astro';
 </dl>
 
 
-## IMG
+## Media
 
 ```md
 ![代替えテキスト](https://source.unsplash.com/random "Hover時のタイトル")
@@ -74,10 +74,25 @@ import EmbedCard from '@/components/Blog/EmbedCard.astro';
 </small>
 
 ```md
-[![リンク付き画像](https://source.unsplash.com/random)](https://test.com)
+[![リンク付き画像](./cat.jpg)](https://test.com)
 ```
 
-[![リンク付き画像](https://source.unsplash.com/random)](https://test.com)
+[![リンク付き画像](./cat.jpg)](https://test.com)
+
+
+videoファイルは残念ながら同じファイルに置けない...基本GifやWebpがいいかな。
+
+```md
+![Webpアニメーション](./keychrone.webp)
+```
+
+![Webpアニメーション](./keychrone.webp)
+
+どうしても置く場合は `@/public` に置いて以下のようにリンクさすしかないかなあ
+
+```md
+<video src="/video/keychrone.mp4" width="640" height="360"controls autoplay />
+```
 
 ---
 

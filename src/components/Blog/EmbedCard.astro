@@ -1,9 +1,13 @@
 ---
-const { url, img = "/placeholder.png", title, site } = Astro.props;
+const { url, img = "/img/embed-placeholder.png", title, site } = Astro.props;
 ---
 
 <a class="embed-card" href={url} target="_blank">
-  <img class="og" src={img} alt="参照記事サムネイル" />
+  <img
+    class="og"
+    src={img == "" ? "/img/embed-placeholder.png" : img}
+    alt="参照記事サムネイル"
+  />
   <h5>{title}</h5>
   <img
     class="favi"
