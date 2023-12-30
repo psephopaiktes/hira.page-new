@@ -6,6 +6,7 @@ const { sns, link = `https://${sns}.com/psephopaiktes` } = Astro.props;
 
 <a href={link} target="_blank" title={sns}>
   <SVG symbol={sns} alt={sns} />
+  <span class="u-textHidden">{sns}</span>
 </a>
 
 <style lang="less">
@@ -20,8 +21,8 @@ const { sns, link = `https://${sns}.com/psephopaiktes` } = Astro.props;
     opacity: 0.7;
 
     span {
-      position: absolute;
-      left: 200%;
+      display: block;
+      height: 0;
     }
 
     :global(svg) {

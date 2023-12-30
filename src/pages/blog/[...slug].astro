@@ -1,6 +1,6 @@
 ---
-import Blog from "@/layouts/Blog.astro";
 import SVG from "@/components/SVG.astro";
+import Blog from "@/layouts/Blog.astro";
 import { Image } from "astro:assets";
 import { getCollection } from "astro:content";
 
@@ -18,7 +18,7 @@ const { post } = Astro.props;
 const { Content, headings } = await post.render();
 ---
 
-<Blog title={post.data.title}>
+<Blog data={post.data}>
   <article>
     <header>
       <Image

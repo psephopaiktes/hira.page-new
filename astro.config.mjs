@@ -8,7 +8,6 @@ export default defineConfig({
   integrations: [sitemap(), mdx()],
   markdown: {
     shikiConfig: {
-      // https://github.com/shikijs/shiki/blob/main/docs/themes.md
       theme: 'one-dark-pro',
     },
   },
