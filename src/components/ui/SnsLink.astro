@@ -5,7 +5,7 @@ const { sns, link = `https://${sns}.com/psephopaiktes` } = Astro.props;
 ---
 
 <a href={link} target="_blank" title={sns}>
-  <SVG symbol={sns} alt={sns} />
+  <SVG symbol={sns} />
   <span class="u-textHidden">{sns}</span>
 </a>
 

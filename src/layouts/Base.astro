@@ -1,5 +1,6 @@
 ---
 import BaseMeta from "@/components/BaseMeta.astro";
+import Footer from "@/components/ui/Footer.astro";
 import CommonBody from "@/layouts/CommonBody.astro";
 
 const { title, description } = Astro.props;
@@ -14,5 +15,6 @@ const { title, description } = Astro.props;
 
   <CommonBody>
     <slot />
+    <Footer />
   </CommonBody>
 </html>

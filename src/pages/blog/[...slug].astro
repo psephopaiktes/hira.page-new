@@ -1,4 +1,5 @@
 ---
+import Share from "@/components/Blog/Share.astro";
 import SVG from "@/components/SVG.astro";
 import Blog from "@/layouts/Blog.astro";
 import { Image } from "astro:assets";
@@ -38,7 +39,7 @@ const { Content, headings } = await post.render();
           post.data.updatedDate && (
             <time datetime={post.data.updatedDate.toISOString()}>
               <SVG symbol="update" class="u-iconInText" />
-              {post.data.updatedDate.toLocaleDateString()} 更新
+              {post.data.updatedDate.toLocaleDateString()}更新
             </time>
           )
         }
@@ -57,7 +58,7 @@ const { Content, headings } = await post.render();
       </div>
     </header>
 
-    <aside>
+    <aside class="toc">
       <h2>Index</h2>
       <ul>
         {
@@ -81,159 +82,243 @@ const { Content, headings } = await post.render();
     <div class="content">
       <Content />
     </div>
+
+    <Share post={post} />
   </article>
-</Blog>
 
-<style lang="less">
-  @import "@/styles/common.less";
+  <footer class="follow">
+    <h3>ブログをフォロー</h3>
+    <ul>
+      <li>
+        <a href="https://x.com/psephopaiktes" target="_blank">
+          <SVG symbol="x" class="u-iconInText" />
+          X
+        </a>
+      </li>
+      <li>
+        <a href="https://fb.me/webablog" target="_blank">
+          <SVG symbol="facebook" class="u-iconInText" /> Facebook
+        </a>
+      </li>
+      <li>
+        <a
+          href="https://feedly.com/i/subscription/feed%2Fhttps%3A%2F%2Fhira.page%2Fblog%2Findex.xml"
+          target="_blank"
+        >
+          <SVG symbol="feedly" class="u-iconInText" />
+          Feedly
+        </a>
+      </li>
+      <li>
+        <a href="https://hira.page/rss.xml" target="_blank">
+          <SVG symbol="rss" class="u-iconInText" /> RSS
+        </a>
+      </li>
+      <li>
+        <a
+          href="https://news.google.com/publications/CAAqBwgKML_jpQswl-69Aw"
+          target="_blank"
+        >
+          <SVG symbol="gnews" class="u-iconInText" />
+          Google
+          <!-- TODO: RSS変わるかも? -->
+        </a>
+      </li>
+    </ul>
 
-  article {
-    display: grid;
-    padding: 32px;
-    gap: 0 32px;
-    grid-template-columns: 800px 1fr;
-    grid-template-areas:
-      "header toc"
-      "content toc";
-    @media (width < @2xl) {
-      grid-template-columns: 640px 1fr;
-    }
-    @media (width < @xl) {
-      gap: 0 16px;
-      grid-template-columns: 100%;
+    <!-- TODO Adsense -->
+  </footer>
+
+  <style lang="less">
+    @import "@/styles/common.less";
+
+    article {
+      display: grid;
+      padding: 64px 32px 0 80px;
+      gap: 0 48px;
+      grid-template-columns: 800px 1fr;
       grid-template-areas:
-        "header"
-        "toc"
-        "content";
-      padding: 0;
-    }
-  }
-
-  header {
-    grid-area: header;
-
-    img {
-      display: block;
-      border-radius: 6px;
-      border: 1px solid rgba(@main, 0.05);
+        "header toc"
+        "content toc";
+      @media (width < @2xl) {
+        padding: 56px 24px 0 64px;
+        gap: 0 56px;
+        grid-template-columns: 640px 1fr;
+      }
       @media (width < @xl) {
-        border-radius: 24px 24px 0 0;
-        border-width: 0 0 1px;
+        gap: 0 16px;
+        grid-template-columns: 100%;
+        grid-template-areas:
+          "header"
+          "toc"
+          "content";
+        padding: 0;
+      }
+    }
+
+    header {
+      grid-area: header;
+
+      img {
+        display: block;
+        border-radius: 6px;
+        border: 1px solid rgba(@main, 0.05);
+        @media (width < @xl) {
+          border-radius: 24px 24px 0 0;
+          border-width: 0 0 1px;
+        }
+        @media (width < @xs) {
+          border-radius: 0;
+        }
+      }
+
+      .meta {
+        @media (width < @xl) {
+          padding: 0 48px;
+        }
+        @media (width < @md) {
+          padding: 0 32px;
+        }
+        @media (width < @xs) {
+          padding: 0 24px;
+        }
+      }
+
+      h1 {
+        margin-top: 32px;
+        font-size: 2em;
+      }
+
+      time {
+        font-size: 0.9em;
+        display: inline-flex;
+        align-items: center;
+        justify-content: center;
+        gap: 0.5em;
+        margin-top: 20px;
+        margin-right: 16px;
+        color: rgba(@main, 0.6);
+      }
+
+      ul {
+        display: flex;
+        float: right;
+        margin-top: 18px;
+        gap: 8px;
+        a {
+          font-size: 0.8em;
+          display: block;
+          height: 28px;
+          line-height: 24px;
+          padding: 0 10px;
+          border-radius: 14px;
+          letter-spacing: 0.05em;
+          background: rgba(@theme, 0.2);
+          color: rgb(@label);
+        }
+        @media (width < @xs) {
+          float: none;
+        }
+      }
+
+      p {
+        margin-top: 16px;
+        font-size: 0.9em;
+      }
+    }
+
+    .toc {
+      grid-area: toc;
+      @media (width < @xl) {
+        margin: 24px 48px 0;
+      }
+      @media (width < @md) {
+        margin-inline: 32px;
       }
       @media (width < @xs) {
-        border-radius: 0;
+        margin-inline: 24px;
+      }
+
+      h2 {
+        font-size: 18px;
+        opacity: 0.2;
+      }
+
+      ul {
+        position: sticky;
+        top: 24px;
+        margin-top: 16px;
+        @media (width < @xl) {
+          margin-top: 12px;
+        }
+      }
+
+      a {
+        display: block;
+        padding: 8px 12px;
+        font-size: 0.8em;
+        line-height: 1.4;
+        border-left: 1px solid rgba(@main, 0.4);
+        opacity: 0.4;
+        &.indent {
+          padding-left: 28px;
+          border-color: rgba(@main, 0.1);
+        }
+        &:hover {
+          background: rgba(@theme, 0.1);
+          opacity: 0.8;
+        }
+        @media (width < @xl) {
+          opacity: 0.6;
+          text-overflow: ellipsis;
+          overflow: hidden;
+          white-space: nowrap;
+        }
       }
     }
 
-    .meta {
+    .content {
+      grid-area: content;
       @media (width < @xl) {
+        padding: 0 48px;
+      }
+      @media (width < @md) {
         padding: 0 32px;
       }
       @media (width < @xs) {
-        padding: 0 16px;
+        padding: 0 24px;
       }
     }
 
-    h1 {
-      margin-top: 24px;
-      font-size: 2em;
-    }
-
-    time {
-      font-size: 0.9em;
-      display: inline-flex;
-      align-items: center;
-      justify-content: center;
-      gap: 0.5em;
-      margin-top: 20px;
-      margin-right: 16px;
-      color: rgba(@main, 0.6);
-    }
-
-    ul {
-      display: flex;
-      float: right;
-      margin-top: 18px;
-      gap: 8px;
-      a {
-        font-size: 0.8em;
-        display: block;
-        height: 28px;
-        line-height: 24px;
-        padding: 0 10px;
-        border-radius: 14px;
-        letter-spacing: 0.05em;
-        background: rgba(@theme, 0.2);
-        color: rgb(@label);
+    .follow {
+      margin-top: 64px;
+      border-top: 2px solid rgba(@theme, 0.1);
+      text-align: center;
+      h3 {
+        margin-top: 48px;
       }
-      @media (width < @xs) {
-        float: none;
+      ul {
+        margin-top: 20px;
+        display: flex;
+        gap: 16px;
+        justify-content: center;
+        font-size: 16px;
+      }
+      li:nth-child(1) a {
+        color: rgb(@main);
+      }
+      li:nth-child(2) a {
+        color: #1876f2;
+      }
+      li:nth-child(3) a {
+        color: #2bb24c;
+      }
+      li:nth-child(4) a {
+        color: rgba(@main, 0.6);
+      }
+      li:nth-child(5) a {
+        color: #eb4d3c;
       }
     }
-
-    p {
-      margin-top: 16px;
-      font-size: 0.9em;
-    }
-  }
-
-  aside {
-    grid-area: toc;
-    padding: 4px;
-    @media (width < @xl) {
-      padding: 20px;
-      margin: 16px 32px 0;
-      border-radius: 6px;
-      background: rgba(@main, 0.04);
-    }
-    @media (width < @xs) {
-      margin-inline: 16px;
-    }
-
-    h2 {
-      font-size: 18px;
-      opacity: 0.2;
-    }
-
-    ul {
-      position: sticky;
-      top: 24px;
-      margin-top: 16px;
-      @media (width < @xl) {
-        margin-top: 12px;
-      }
-    }
-
-    a {
-      display: block;
-      padding: 4px 12px;
-      font-size: 0.8em;
-      border-left: 1px solid rgba(@main, 0.4);
-      opacity: 0.4;
-      &.indent {
-        padding-left: 28px;
-        border-color: rgba(@main, 0.1);
-      }
-      &:hover {
-        background: rgba(@theme, 0.1);
-        opacity: 0.8;
-      }
-      @media (width < @xl) {
-        opacity: 0.6;
-        text-overflow: ellipsis;
-        overflow: hidden;
-        white-space: nowrap;
-      }
-    }
-  }
-
-  .content {
-    grid-area: content;
-    @media (width < @xl) {
-      padding: 0 32px;
-    }
-    @media (width < @xs) {
-      padding: 0 16px;
-    }
-  }
-</style>
+  </style>
+</Blog>

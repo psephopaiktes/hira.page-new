@@ -5,21 +5,34 @@ const { posts } = Astro.props;
 
 <ul>
   {
-    posts.map((post) => (
-      <li>
-        <a
-          href={post.data.redirect || `/blog/${post.slug}/`}
-          target={post.data.redirect ? "_blank" : null}
-        >
-          <Image
-            src={post.data.cover}
-            alt={post.data.title}
-            transition:name={post.slug}
-          />
-          <h4>{post.data.title}</h4>
-        </a>
-      </li>
-    ))
+    posts.map((post) => {
+      const redirectSite = post.data.redirect
+        ? /note/.test(post.data.redirect)
+          ? "note"
+          : /qiita/.test(post.data.redirect)
+            ? "qiita"
+            : /zenn/.test(post.data.redirect)
+              ? "zenn"
+              : console.error("未対応のURLです")
+        : "";
+
+      return (
+        <li>
+          <a
+            href={post.data.redirect || `/blog/${post.slug}/`}
+            target={redirectSite ? "_blank" : null}
+          >
+            <Image
+              src={post.data.cover}
+              alt={post.data.title}
+              transition:name={post.slug}
+            />
+            <h4>{post.data.title}</h4>
+            {redirectSite && <span class={redirectSite} />}
+          </a>
+        </li>
+      );
+    })
   }
 </ul>
 
