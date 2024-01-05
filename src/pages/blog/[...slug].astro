@@ -29,6 +29,33 @@ const { Content, headings } = await post.render();
       />
 
       <div class="meta">
+        <ol
+          class="breadcrumb"
+          itemscope=""
+          itemtype="https://schema.org/BreadcrumbList"
+        >
+          <li
+            itemprop="itemListElement"
+            name="HOME"
+            itemscope=""
+            itemType="https://schema.org/ListItem"
+          >
+            <a href="/" itemprop="item">HOME</a>
+            <SVG symbol="next" class="u-iconInText" />
+            <meta itemprop="position" content="1" />
+          </li>
+          <li
+            itemprop="itemListElement"
+            name="ブログ一覧"
+            itemscope=""
+            itemType="https://schema.org/ListItem"
+          >
+            <a href="/blog" itemprop="item">ブログ一覧</a>
+            <SVG symbol="next" class="u-iconInText" />
+            <meta itemprop="position" content="2" />
+          </li>
+        </ol>
+
         <h1>{post.data.title}</h1>
 
         <time datetime={post.data.date.toISOString()}>
@@ -59,7 +86,7 @@ const { Content, headings } = await post.render();
     </header>
 
     <aside class="toc">
-      <h2>Index</h2>
+      <h2>Index {Astro.name}</h2>
       <ul>
         {
           headings.map((heading) =>
@@ -172,7 +199,18 @@ const { Content, headings } = await post.render();
         }
       }
 
+      .breadcrumb {
+        margin-top: 8px;
+        display: flex;
+        gap: 2px;
+        opacity: 0.6;
+        :global(svg) {
+          opacity: 0.4;
+        }
+      }
+
       .meta {
+        margin-top: 24px;
         @media (width < @xl) {
           padding: 0 48px;
         }
@@ -185,7 +223,7 @@ const { Content, headings } = await post.render();
       }
 
       h1 {
-        margin-top: 32px;
+        margin-top: 4px;
         font-size: 2em;
       }
 

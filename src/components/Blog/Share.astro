@@ -9,7 +9,7 @@ const { post } = Astro.props;
     class="native"
     id="js-nativeBtn"
     data-title={post.data.title + "｜WEBA"}
-    data-url={"https://hira.page/" + post.slug}
+    data-url={Astro.url}
   >
     <SVG symbol="share-google" />
     <SVG symbol="share-apple" />
@@ -18,8 +18,8 @@ const { post } = Astro.props;
 
   <a
     class="x"
-    href={"https://twitter.com/intent/tweet?url=https://hira.page/" +
-      post.slug +
+    href={"https://twitter.com/intent/tweet?url=" +
+      Astro.url +
       "&text=" +
       post.data.title +
       "｜WEBA"}
@@ -32,8 +32,7 @@ const { post } = Astro.props;
 
   <a
     class="facebook"
-    href={"https://www.facebook.com/sharer/sharer.php?u=https://hira.page/" +
-      post.slug}
+    href={"https://www.facebook.com/sharer/sharer.php?u=" + Astro.url}
     target="_blank"
     title="Facebookでシェア"
   >
@@ -43,7 +42,7 @@ const { post } = Astro.props;
 
   <a
     class="hatena"
-    href={"https://b.hatena.ne.jp/entry/https://hira.page/" + post.slug}
+    href={"https://b.hatena.ne.jp/entry/" + Astro.url}
     target="_blank"
     title="はてブに登録"
   >
@@ -53,7 +52,7 @@ const { post } = Astro.props;
 
   <a
     class="pocket u-hideSp"
-    href={"https://getpocket.com/save?url=https://hira.page/" + post.slug}
+    href={"https://getpocket.com/save?url=" + Astro.url}
     target="_blank"
     title="Pocketに保存"
   >
@@ -65,8 +64,8 @@ const { post } = Astro.props;
     class="line u-showSp"
     href={"https://line.me/R/msg/text/?" +
       post.data.title +
-      "｜WEBA https://hira.page/" +
-      post.slug}
+      "｜WEBA " +
+      Astro.url}
     target="_blank"
     title="LINEで共有"
   >
@@ -81,9 +80,7 @@ const { post } = Astro.props;
     () => {
       const nativeBtn = document.getElementById("js-nativeBtn");
 
-      if (!nativeBtn || !navigator.share) {
-        return;
-      }
+      if (!nativeBtn || !navigator.share) return;
 
       nativeBtn.classList.add("show");
       const title = nativeBtn.dataset.title;

@@ -2,17 +2,17 @@
 import { Image } from "astro:assets";
 import { getCollection } from "astro:content";
 
-const posts = await await getCollection("blog", ({ data }) => {
+const posts = await getCollection("blog", ({ data }) => {
   return import.meta.env.PROD ? data.draft !== true : true;
 });
 
 posts.sort((a, b) => b.data.date.valueOf() - a.data.date.valueOf());
-// 3つか5つ程度まで制限
+// 5つ程度まで制限
 ---
 
 <ul>
   {
-    posts.map((post) => (
+    posts.slice(0, 5).map((post) => (
       <li>
         <a href={`/blog/${post.slug}/`}>
           <Image
@@ -22,7 +22,11 @@ posts.sort((a, b) => b.data.date.valueOf() - a.data.date.valueOf());
           />
           <h4 class="title">{post.data.title}</h4>
           <p>{post.data.date.toDateString()}</p>
-          // TODO: Tag2つ表示 // 日付
+          <ul>
+            {post.data.tags.slice(0, 2).map((tag) => (
+              <li>{tag}</li>
+            ))}
+          </ul>
         </a>
       </li>
     ))

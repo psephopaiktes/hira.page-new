@@ -1,7 +1,7 @@
 ---
 import BlogList from "@/components/Blog/List.astro";
-import Headline from "@/components/ui/Headline.astro";
 import BlogTagFilter from "@/components/Blog/TagFilter.astro";
+import Headline from "@/components/ui/Headline.astro";
 import Base from "@/layouts/Base.astro";
 import { getCollection } from "astro:content";
 
@@ -11,7 +11,6 @@ const posts = await getCollection("blog", ({ data }) => {
 const tags = [...new Set(posts.map((post) => post.data.tags).flat())];
 
 posts.sort((a, b) => b.data.date.valueOf() - a.data.date.valueOf());
-// TODO: Works SortはHTML側に書くと並び替えできる?
 ---
 
 <Base title="BLOG">

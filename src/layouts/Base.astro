@@ -3,14 +3,27 @@ import BaseMeta from "@/components/BaseMeta.astro";
 import Footer from "@/components/ui/Footer.astro";
 import CommonBody from "@/layouts/CommonBody.astro";
 
-const { title, description } = Astro.props;
+let {
+  title,
+  description = "デザイナー「平田 章」のブログ兼ポートフォリオサイトです。Webフロント技術やUIデザインなどの情報を発信しています。",
+} = Astro.props;
+title = title ? `${title} ｜WEBA` : "WEBA";
 ---
 
 <html lang="ja">
   <head prefix="og: https://ogp.me/ns#">
     <BaseMeta title={title} description={description} />
 
-    <!-- TODO: Basic OG -->
+    <!-- OGP -->
+    <meta property="og:type" content="website" />
+    <meta property="og:title" content={title} />
+    <meta property="og:site_name" content={import.meta.env.SITE_NAME} />
+    <meta property="og:description" content={description} />
+    <meta property="og:image" content={Astro.site + "img/ogp.png"} />
+    <meta property="og:url" content={Astro.url} />
+    <meta property="og:locale" content="ja_JP" />
+    <meta name="twitter:card" content="summary" />
+    <meta name="twitter:site" content="@psephopaiktes" />
   </head>
 
   <CommonBody>

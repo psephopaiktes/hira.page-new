@@ -1,44 +1,25 @@
 ---
+import Hero from "@/components/Me/Hero.astro";
+import Info from "@/components/Me/Info.astro";
+import MouseStalker from "@/components/Me/MouseStalker.astro";
+import Resume from "@/components/Me/Resume.astro";
 import Base from "@/layouts/Base.astro";
-import Squircle from "@/components/Squircle.astro";
-import { SquircleDataUrl } from "@/components/SquircleDataUrl.js";
-
-const url = SquircleDataUrl({
-  radius: 24,
-  width: 240,
-  height: 240,
-  curve: 16,
-  fill: "red",
-});
-const attr = {
-  stroke: "#000",
-  "stroke-width": 2,
-  "stroke-opacity": 0.5,
-};
 ---
 
-<Base title="ME">
-  <Squircle radius="24" /><br />
-  <Squircle width="480" height="80" radius="32" fill="red" /><br />
+<Base title="ABOUT ME">
+  <Hero />
+  <Info />
+  <Resume />
 
-  <Squircle
-    width="480"
-    height="80"
-    radius="32"
-    curve="24"
-    fill="none"
-    stroke="red"
-    stroke-width="4"
-    stroke-opacity="0.5"
-  /><br />
-
-  <Squircle width="320" height="160" radius="48 48 0 0" /><br />
-
-  <Squircle width="320" height="320" radius="48" fill="currentColor" /><br />
-
-  <Squircle width="320" height="480" radius="32" curve="24" /><br />
+  <a href="/contact" class="contactBtn" data-swellStalker="contact">
+    ご依頼・お問い合わせ
+  </a>
+  <MouseStalker />
 </Base>
 
 <style lang="less">
   @import "@/styles/common.less";
+  p {
+    opactiy: 0.99;
+  }
 </style>

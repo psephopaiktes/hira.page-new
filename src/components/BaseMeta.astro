@@ -1,14 +1,7 @@
 ---
 import "@/styles/global.less";
 import { ViewTransitions } from "astro:transitions";
-
-let {
-  title,
-  description = "デザイナー「平田 章」のブログ兼ポートフォリオサイトです。Webフロント技術やUIデザインなどの情報を発信しています。",
-} = Astro.props;
-
-title = title ? `${title} ｜WEBA` : "WEBA";
-// TODO 統合
+const { title, description } = Astro.props;
 ---
 
 <title>{title}</title>

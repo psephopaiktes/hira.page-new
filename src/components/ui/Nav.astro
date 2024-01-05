@@ -22,17 +22,16 @@ const pageList = ["blog", "works", "me", "price"];
   <ul class="menu">
     {
       pageList.map((path) => {
-        // Build後はpathnameの末尾にスラシュがつくのでそれを考慮
         const isActive = new RegExp(`^/${path}/?$`).test(currentPath);
-        // TODO: Perfect Is Active みたいな アニメーションは完全一致時のみ
+        const isChild = new RegExp(`^/${path}(?:/|$)`).test(currentPath);
 
         return (
           <li>
-            {isActive && (
+            {isChild && (
               <div class="navIndicator" transition:name="navIndicator" />
             )}
 
-            <a class={isActive ? "active" : ""} href={`/${path}`}>
+            <a class={isChild ? "active" : null} href={`/${path}`}>
               <dotlottie-player
                 autoplay={isActive ? "autoplay" : null}
                 src={`/lottie/${path}.lottie`}
