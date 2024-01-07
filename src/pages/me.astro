@@ -3,23 +3,32 @@ import Hero from "@/components/Me/Hero.astro";
 import Info from "@/components/Me/Info.astro";
 import MouseStalker from "@/components/Me/MouseStalker.astro";
 import Resume from "@/components/Me/Resume.astro";
+import SquircleButtonLink from "@/components/ui/SquircleButtonLink.astro";
 import Base from "@/layouts/Base.astro";
 ---
 
 <Base title="ABOUT ME">
   <Hero />
   <Info />
+
+  <SquircleButtonLink
+    href="/contact"
+    data-swellStalker="contactBtn"
+    class="contact"
+  >
+    ご依頼・お問い合わせ
+  </SquircleButtonLink>
+
   <Resume />
 
-  <a href="/contact" class="contactBtn" data-swellStalker="contact">
-    ご依頼・お問い合わせ
-  </a>
   <MouseStalker />
 </Base>
 
-<style lang="less">
-  @import "@/styles/common.less";
-  p {
-    opactiy: 0.99;
+<style is:global>
+  main {
+    text-align: center;
+  }
+  .contactBtn {
+    margin: 96px auto 0;
   }
 </style>

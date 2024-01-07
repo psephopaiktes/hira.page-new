@@ -4,12 +4,6 @@ import AoSleepImage from "@/assets/img/ao-sleep.webp";
 ---
 
 <section>
-  <!-- TODO: MEで実装後。こっちは薄いからBlur画像自体なくていいかも -->
-  <!-- <img
-    src="data:image/webp;base64,UklGRkYAAABXRUJQVlA4IDoAAACwAQCdASoJAAMAAQAeJYwCdADdBGGQAP7f5vv5uEZjCidPCVKrviOl/CXrdRyuiDr1S25MlsoGuJAA"
-    alt=""
-    aria-hidden="true"
-  /> -->
   <Image
     id="js-fadeImage"
     data-loaded="false"
@@ -55,9 +49,7 @@ import AoSleepImage from "@/assets/img/ao-sleep.webp";
   section {
     display: grid;
     height: 240px;
-    @media (width < @xs) {
-      // height: 320px;
-    }
+
     > * {
       grid-area: 1/-1;
     }

@@ -1,0 +1,15 @@
+---
+const { ...attr } = Astro.props;
+---
+
+<a {...attr}>
+  <slot />
+</a>
+
+<style lang="less">
+  @import "@/styles/common.less";
+
+  a {
+    display: block;
+  }
+</style>

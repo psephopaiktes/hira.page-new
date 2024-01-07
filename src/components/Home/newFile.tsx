@@ -1,44 +1,32 @@
----
-import Icon from "@/assets/img/icon.png";
-import MeImage from "@/assets/img/me/eyecatch.jpg";
 import { ME_DESCRIPTION } from "@/consts";
-import { Image } from "astro:assets";
----
 
-<a href="/me" class="c-card">
-  <Image
-    class="meImage"
-    src={MeImage}
-    alt="平田のイメージ画像"
-    transition:name="meImage"
-  />
+<Fragment>
+  <a href="/me" class="c-card">
+    <div class="overlay">
+      TODO
+      <img
+        width="120"
+        height="120"
+        src="/img/icon/android-chrome.png"
+        alt="Profile Icon"
+      />
+      <h3>Akira HIRATA</h3>
+      <p>{ME_DESCRIPTION}</p>
+    </div>
+  </a>
 
-  <div class="overlay">
-    <Image class="icon" src={Icon} alt="プロフィールアイコン" />
-
-    <h3>Akira HIRATA</h3>
-    <p>{ME_DESCRIPTION}</p>
-  </div>
-</a>
-
-<style lang="less">
+  <style lang="less">{`
   @import "@/styles/common.less";
 
   a {
     margin-top: 16px;
     width: 100%;
     background-color: rgba(@main, 0.2);
+    background-image: url("/img/hirata-1.webp");
     background-size: 100%;
     background-position: center;
     @media (width < @xs) {
       background-size: auto 100%;
-    }
-
-    .meImage {
-      width: 100%;
-      height: 100%;
-      object-fit: cover;
-      position: absolute;
     }
 
     .overlay {
@@ -53,7 +41,7 @@ import { Image } from "astro:assets";
       border: 4px solid rgba(@main, 0.1);
       box-sizing: content-box;
       background-color: rgba(@base, 0.7);
-      backdrop-filter: blur(4px) grayscale(0.4);
+      backdrop-filter: blur(3px) grayscale(0.4);
       color: rgba(@main, 1);
       border-radius: 12px;
       transition: @transition;
@@ -83,7 +71,7 @@ import { Image } from "astro:assets";
         left: 50%;
       }
 
-      .icon {
+      img {
         grid-area: 1 / 1 / 3 / 2;
         justify-self: end;
         width: 96px;
@@ -120,10 +108,15 @@ import { Image } from "astro:assets";
 
   a:hover,
   a:active {
+    background-size: 105%;
+    @media (width < @xs) {
+      background-size: auto 105%;
+    }
     .overlay {
       backdrop-filter: none;
       opacity: 0.5;
-      // filter: blur(4px);
+      filter: blur(4px);
     }
   }
-</style>
+`}</style>
+</Fragment>;
